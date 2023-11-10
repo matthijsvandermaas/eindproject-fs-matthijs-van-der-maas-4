@@ -17,4 +17,7 @@ public class RoleDto {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+
+    public void setId(long l) {
+    }
 }

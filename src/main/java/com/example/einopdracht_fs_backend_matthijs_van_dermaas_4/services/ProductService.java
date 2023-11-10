@@ -1,17 +1,10 @@
 package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.services;
 
 
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.ParticulierDto;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.ProductDto;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.IdNotFoundException;
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Particulier;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Role;
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.repository.ParticulierRepository;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.repository.ProductRepository;
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.repository.RoleRepository;
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.repository.UserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -28,21 +21,18 @@ public class ProductService {
         ProductService.productRepository = productRepository;
     }
 
-    public static ProductDto getProduct(Long id) {
-        Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()) {
-            Product p = product.get();
-            ProductDto pDto = new ProductDto();
-            productToProductDto(p, pDto);
-            return (pDto);
-        } else {
-            throw new IdNotFoundException("Property not found with ID: " + id);
-        }
-    }
-
 
     public List<ProductDto> getAllData() {
-        return getProductDtos();
+        List<Product> data = productRepository.findAll();
+        List<ProductDto> productDto = new ArrayList<>();
+
+        for (Product p : data) {
+            ProductDto pDto = new ProductDto();
+            productToProductDto(p, pDto);
+
+            productDto.add(pDto);
+        }
+        return productDto;
     }
     private void productDtoToProduct(ProductDto pDto, Product p) {
         pDto.setProductName(p.getProductName());
@@ -72,7 +62,7 @@ public class ProductService {
     }
 
 
-    public static ProductDto getroduct(Long id) {
+    public static ProductDto getProduct(Long id) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isPresent()) {
             Product p = product.get();
@@ -112,17 +102,16 @@ public class ProductService {
         ProductService.productRepository = productRepository;
     }
 
-
-    private List<ProductDto> getProductDtos() {
-        List<Product> data = productRepository.findAll();
-        List<ProductDto> productDto = new ArrayList<>();
-
-        for (Product p : data) {
-            ProductDto pDto = new ProductDto();
-            productToProductDto(p, pDto);
-
-            productDto.add(pDto);
+    public static ProductDto updateProduct(Long id, ProductDto productDto) {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            Product p = product.get();
+            productToProductDto(p, productDto);
+            productRepository.save(p);
+            return productDto;
+        } else {
+            throw new IdNotFoundException("Property not found with ID: " + id);
         }
-        return productDto;
     }
+
 }

@@ -3,6 +3,7 @@ package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.modelen;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Security.Authority;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,13 +17,13 @@ public class User {
     private String username;
     private String password;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_name")
-    )
-    private List<Role> roles;
+    //    Relation with Role ManyToMany.
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles = new ArrayList<>();
+
+    //    Relation with Profile OneToOne.
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    Profile profile;
 
     public User() {
     }
@@ -81,5 +82,9 @@ public class User {
 
     public Collection<Object> getAuthorities() {
         return getAuthorities();
+    }
+
+
+    public void setProfile(Profile profile) {
     }
 }

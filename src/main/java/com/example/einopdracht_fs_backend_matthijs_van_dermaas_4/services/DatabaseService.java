@@ -1,6 +1,6 @@
 package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.services;
 
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.FileUploadResponse.FileUploadResponse;
+import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.FileUpload.FileUploadResponse;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.modelen.FileDocument;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.repository.DocFileRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,7 +46,7 @@ public class DatabaseService {
 
     public FileDocument singleFileDownload(String fileName, HttpServletRequest request){
 
-       FileDocument document = doc.findByFileName(fileName);
+        FileDocument document = doc.findByFileName(fileName);
 
 //        this mediaType decides witch type you accept if you only accept 1 type
 //        MediaType contentType = MediaType.IMAGE_JPEG;
@@ -126,18 +126,18 @@ public class DatabaseService {
 
     public void createZipEntry(String file, ZipOutputStream zos) throws IOException {
 
-            Resource resource = downLoadFileDatabase(file);
-                ZipEntry zipEntry = new ZipEntry(Objects.requireNonNull(resource.getFilename()));
-                try {
-                    zipEntry.setSize(resource.contentLength());
-                    zos.putNextEntry(zipEntry);
+        Resource resource = downLoadFileDatabase(file);
+        ZipEntry zipEntry = new ZipEntry(Objects.requireNonNull(resource.getFilename()));
+        try {
+            zipEntry.setSize(resource.contentLength());
+            zos.putNextEntry(zipEntry);
 
-                    StreamUtils.copy(resource.getInputStream(), zos);
+            StreamUtils.copy(resource.getInputStream(), zos);
 
-                    zos.closeEntry();
-                } catch (IOException e) {
-                    System.out.println("some exception while zipping");
-                }
+            zos.closeEntry();
+        } catch (IOException e) {
+            System.out.println("some exception while zipping");
+        }
 
     }
 }

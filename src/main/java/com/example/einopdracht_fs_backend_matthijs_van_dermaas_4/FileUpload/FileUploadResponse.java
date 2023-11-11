@@ -1,4 +1,4 @@
-package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.FileUploadResponse;
+package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.FileUpload;
 
 public class FileUploadResponse {
 

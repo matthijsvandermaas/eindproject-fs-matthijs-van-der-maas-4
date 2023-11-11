@@ -1,6 +1,6 @@
 package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.services;
 
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.FileUploadResponse.FileUploadResponse;
+import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.FileUpload.FileUploadResponse;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.modelen.FileDocument;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.repository.DocFileRepository;
 import jakarta.servlet.http.HttpServletRequest;

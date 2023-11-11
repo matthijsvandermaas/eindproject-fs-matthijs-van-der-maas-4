@@ -25,6 +25,7 @@ public class GlobalCorsConfig implements WebMvcConfigurer
                         .allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                         .allowCredentials(true);
+
             }
         };
     }

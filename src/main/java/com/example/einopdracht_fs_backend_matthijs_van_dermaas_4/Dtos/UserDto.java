@@ -2,63 +2,50 @@ package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 
 
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Security.Authority;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.Set;
 
 public class UserDto {
 
-    public String username;
-    public String password;
-    public Boolean enabled;
-    public String apikey;
-    public String email;
-    public Set<Authority> authorities;
+    @NotEmpty(message = "Username cannot be empty")
+    private String username;
+    @NotEmpty (message = "Password cannot be empty")
+    private String password;
+
+    private String[] roles;
+
+    public UserDto(String username, String password, String[] roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public UserDto() {
+
+    }
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public String getApikey() {
-        return apikey;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Set<Authority> getAuthorities() {
-        return authorities;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public String[] getRoles() {
+        return roles;
     }
 
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
+    public void setRoles(String[] roles) {
+        this.roles = roles;
     }
 }

@@ -6,17 +6,13 @@ import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Security.Author
 import java.util.Set;
 
 public class UserDto {
+    public String email;
 
-    public String username;
     public String password;
     public Boolean enabled;
     public String apikey;
-    public String email;
-    public Set<Authority> authorities;
 
-    public String getUsername() {
-        return username;
-    }
+    public Set<Authority> authorities;
 
     public String getPassword() {
         return password;
@@ -36,10 +32,6 @@ public class UserDto {
 
     public Set<Authority> getAuthorities() {
         return authorities;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public void setPassword(String password) {

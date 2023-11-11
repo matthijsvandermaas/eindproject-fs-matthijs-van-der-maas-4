@@ -2,7 +2,7 @@ package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.controllers;
 
 
 
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.FileUploadResponse.FileUploadResponse;
+import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.FileUpload.FileUploadResponse;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.modelen.FileDocument;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.services.DatabaseService;
 import jakarta.servlet.http.HttpServletRequest;

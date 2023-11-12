@@ -2,14 +2,14 @@ package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.controllers;
 
 
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.AuthenticationRequest;
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Security.UserDetails;
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Security.UserDetailsService;
+import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Security.MyUserDetailsService;
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.util.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -18,12 +18,11 @@ import java.security.Principal;
 @RestController
 public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
-
-    private final UserDetailsService myUserDetailsService;
+    private final MyUserDetailsService myUserDetailsService;
 
     private final JwtUtil jwtUtl;
 
-    public AuthenticationController(AuthenticationManager authenticationManager, UserDetailsService myUserDetailsService, JwtUtil jwtUtl) {
+    public AuthenticationController(AuthenticationManager authenticationManager, MyUserDetailsService myUserDetailsService, JwtUtil jwtUtl) {
         this.authenticationManager = authenticationManager;
         this.jwtUtl = jwtUtl;
         this.myUserDetailsService = myUserDetailsService;

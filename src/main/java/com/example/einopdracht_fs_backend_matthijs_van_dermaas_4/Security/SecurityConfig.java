@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,22 +24,14 @@ public class SecurityConfig {
 
     private final JwtService jwtService;
     private final UserRepository userRepository;
+    private final MyUserDetailsService myUserDetailsService;
 
-    public SecurityConfig( JwtService service, UserRepository userRepository) {
-
+    public SecurityConfig( JwtService service, UserRepository userRepository, MyUserDetailsService myUserDetailsService) {
+        this.myUserDetailsService = myUserDetailsService;
         this.jwtService = service;
         this.userRepository = userRepository;
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsService(userRepository) {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return null;
-            }
-        };
-    }
     @Bean
     public AuthenticationManager authenticationManager(org.springframework.security.core.userdetails.UserDetailsService udService, PasswordEncoder passwordEncoder) throws Exception {
         var providerManager = new DaoAuthenticationProvider();
@@ -47,7 +40,6 @@ public class SecurityConfig {
         return new ProviderManager(providerManager);
     }
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -55,7 +47,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        http                .httpBasic(basic -> basic.disable())
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(
                                 "/*",
@@ -65,6 +58,7 @@ public class SecurityConfig {
                                 "/producenten",
                                 "/producten",
                                 "/users",
+                                "/users/createWithProfile",
                                 "/roles").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/producten").hasRole("BREWER")
@@ -111,7 +105,7 @@ public class SecurityConfig {
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(csrf -> csrf.disable())
-                .addFilterBefore(new JwtRequestFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtRequestFilter(jwtService, myUserDetailsService), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

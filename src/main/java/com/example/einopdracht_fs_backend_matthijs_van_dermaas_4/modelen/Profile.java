@@ -13,7 +13,7 @@ public class Profile {
     @GeneratedValue
     private Long id;
     @NotEmpty(message = "username cannot be empty")
-    private String UserName;
+    private String username;
     @NotEmpty(message = "password cannot be empty")
     private String password;
     @NotEmpty(message = "firstname cannot be empty")
@@ -29,14 +29,14 @@ public class Profile {
     @OneToOne
     User user;
 
-    public Profile(Long id, String firstName, String lastName, String email, User user, String company, String UserName, String password) {
+    public Profile(Long id, String firstName, String lastName, String email, User user, String company, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.user = user;
         this.company = company;
-        this.UserName = UserName;
+        this.username = username;
         this.password = password;
     }
 
@@ -50,6 +50,22 @@ public class Profile {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -68,6 +84,14 @@ public class Profile {
         this.lastName = lastName;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -82,32 +106,5 @@ public class Profile {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        UserName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCompany(String company) {
-        return this.company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public void setUsername(String username) {
     }
 }

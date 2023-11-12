@@ -31,6 +31,10 @@ public class ProfileAndUserDto {
         this.roles = roles;
     }
 
+    public ProfileAndUserDto() {
+
+    }
+
     public String getUsername() {
         return username;
     }

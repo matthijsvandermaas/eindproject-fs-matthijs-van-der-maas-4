@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EinopdrachtFsBackendMatthijsVanDerMaas4Application {
+public class EindopdrachtFsBackendMatthijsVanDerMaas4Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(EinopdrachtFsBackendMatthijsVanDerMaas4Application.class, args);
+        SpringApplication.run(EindopdrachtFsBackendMatthijsVanDerMaas4Application.class, args);
     }
 
 }

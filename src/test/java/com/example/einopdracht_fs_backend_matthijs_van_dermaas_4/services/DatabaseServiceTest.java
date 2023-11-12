@@ -4,33 +4,33 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductServiceTest {
+class DatabaseServiceTest {
 
     @Test
-    void getAllProducts() {
+    void getALlFromDB() {
     }
 
     @Test
-    void getProduct() {
+    void uploadFileDocument() {
     }
 
     @Test
-    void createProduct() {
+    void singleFileDownload() {
     }
 
     @Test
-    void deleteProduct() {
+    void createMultipleUpload() {
     }
 
     @Test
-    void saveProduct() {
+    void getZipDownload() {
     }
 
     @Test
-    void testSaveProduct() {
+    void downLoadFileDatabase() {
     }
 
     @Test
-    void processSqlFile() {
+    void createZipEntry() {
     }
 }

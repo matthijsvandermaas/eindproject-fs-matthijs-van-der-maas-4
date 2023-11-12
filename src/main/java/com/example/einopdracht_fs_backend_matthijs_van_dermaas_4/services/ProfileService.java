@@ -20,28 +20,24 @@ import java.util.Optional;
 public class ProfileService {
 
     private final ProfileRepository profileRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+
+
     public ProfileService(ProfileRepository profileRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
         this.profileRepository = profileRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
     }
 
 
     public List<ProfileDto> getAllProfile() {
         List<Profile> profile = profileRepository.findAll();
-        List<ProfileDto> profileDtos = new ArrayList<>();
+        List<ProfileDto> profileDto = new ArrayList<>();
 
         for (Profile p : profile) {
             ProfileDto pDto = new ProfileDto();
             profileToProfileDto(p, pDto);
 
-            profileDtos.add(pDto);
+            profileDto.add(pDto);
         }
-        return profileDtos;
+        return profileDto;
     }
 
     private static void profileToProfileDto(Profile p, ProfileDto pDto) {
@@ -55,6 +51,7 @@ public class ProfileService {
         p.setFirstName(pDto.getFirstName());
         p.setLastName(pDto.getLastName());
         p.setEmail(pDto.getEmail());
+        p.setId(pDto.getId());
     }
 
     public ProfileDto getProfile(Long id) {

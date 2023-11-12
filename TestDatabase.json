@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "productName": "Product 1",
+    "nameProducer": "Producer 1",
+    "type": "Type A",
+    "percentage": 5.0,
+    "email": "email@example.com",
+    "color": "Amber",
+    "tast": "Fruity",
+    "volume": "330",
+    "productionLocation": "Location A",
+    "file": "../src/assets/general pics/hop_and_barley.png",
+    "file2": "../src/assets/general pics/beer_On_Table_1.png",
+
+  },
+  {
+    "id": 2,
+    "productName": "Product 2",
+    "nameProducer": "Producer 2",
+    "type": "Type B",
+    "percentage": 6.5,
+    "email": "email2@example.com",
+    "color": "Dark",
+    "tast": "Roasted",
+    "volume": "500",
+    "productionLocation": "Location B",
+    "file": "../src/assets/general pics/beer_On_Table_1.png",
+    "file2": "../src/assets/general pics/four_glasses.png"
+
+  },
+  {
+    "id": 3,
+    "productName": "Product 3",
+    "nameProducer": "Producer 3",
+    "type": "Type c",
+    "percentage": 6.8,
+    "email": "email4@example.com",
+    "color": "blond",
+    "tast": "Roasted",
+    "volume": "550",
+    "productionLocation": "Location c",
+    "photo": "../src/assets/general pics/beer_On_Table_1.png",
+    "photo2": "../src/assets/general pics/four_glasses.png"
+
+  },
+  {
+    "id": 4,
+    "productName": "Product 4",
+    "nameProducer": "Producer 3",
+    "type": "Type c",
+    "percentage": 6.8,
+    "email": "email4@example.com",
+    "color": "blond",
+    "tast": "Roasted",
+    "volume": "550",
+    "productionLocation": "Location c",
+    "file": "../src/assets/general pics/beer_On_Table_1.png",
+    "file2": "../src/assets/general pics/four_glasses.png"
+
+  }
+]

@@ -1,6 +1,5 @@
 package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.modelen;
 
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Security.Authority;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String username;
     private String password;
 
@@ -74,17 +72,43 @@ public class User {
         role.getUsers().remove(this);
     }
 
-    public void addAuthority(Authority authority) {
-    }
-
-    public void removeAuthority(Authority authorityToRemove) {
-    }
-
-    public Collection<Object> getAuthorities() {
-        return getAuthorities();
-    }
-
 
     public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public void setFirstName(String firstName) {
+        this.profile.setFirstName(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        this.profile.setLastName(lastName);
+    }
+
+    public void setEmail(String email) {
+        this.profile.setEmail(email);
+    }
+
+    public void setCompany(String company) {
+        this.profile.setCompany(company);
+    }
+
+    public String getFirstName() {
+        return this.profile.getFirstName();
+    }
+
+    public String getLastName() {
+        return this.profile.getLastName();
+    }
+
+    public String getEmail() {
+        return this.profile.getEmail();
+    }
+
+    public String getCompany() {
+        return this.profile.getCompany();
     }
 }
+
+
+

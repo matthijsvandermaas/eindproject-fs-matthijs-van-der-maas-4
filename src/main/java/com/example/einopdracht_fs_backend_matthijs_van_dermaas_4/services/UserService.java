@@ -11,8 +11,6 @@ import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.repository.Role
 import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +66,7 @@ public class UserService {
 
         // User gedeelte van de ProfileDTO
         UserDto userDto = new UserDto();
-        userDto.setUsername(profileDto.getUsername());
+        userDto.setUsername(profileDto.getUserName());
         userDto.setPassword(passwordEncoder.encode(profileDto.getPassword()));
 
         User user = new User();
@@ -105,7 +103,7 @@ public class UserService {
 
 
     private void profileDtoToProfile(ProfileAndUserDto pDto, Profile p) {
-        p.setUsername(pDto.getUsername());
+        p.setUsername(pDto.getUserName());
         p.setPassword(pDto.getPassword());
         p.setFirstName(pDto.getFirstName());
         p.setLastName(pDto.getLastName());

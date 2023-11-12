@@ -1,6 +1,5 @@
 package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.modelen;
 
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Security.Authority;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -74,17 +73,9 @@ public class User {
         role.getUsers().remove(this);
     }
 
-    public void addAuthority(Authority authority) {
-    }
-
-    public void removeAuthority(Authority authorityToRemove) {
-    }
-
-    public Collection<Object> getAuthorities() {
-        return getAuthorities();
-    }
 
 
     public void setProfile(Profile profile) {
     }
-}
+    }
+

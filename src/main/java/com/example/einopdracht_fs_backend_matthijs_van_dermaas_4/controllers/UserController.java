@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -32,6 +32,7 @@ public class UserController {
         UserDto result = userService.createUserWithProfile(profileDto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
+
 
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {

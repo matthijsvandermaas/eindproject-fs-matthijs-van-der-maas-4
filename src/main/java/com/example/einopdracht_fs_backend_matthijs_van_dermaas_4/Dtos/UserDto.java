@@ -1,7 +1,6 @@
 package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 
 
-import com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Security.Authority;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.util.Set;

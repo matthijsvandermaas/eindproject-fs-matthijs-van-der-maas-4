@@ -6,12 +6,6 @@ INSERT INTO roles ("role_name") VALUES ('ROLE_USER'), ('ROLE_ADMIN'), ('ROLE_BRE
 INSERT INTO users (id, username, password) VALUES (1000, 'matthijsvandermaas@test.com', 'danielle');
 
 
-
--- Profiel toevoegen
-INSERT INTO profile (id, email, first_name, last_name, company, password, username)
-VALUES (1002, 'matthijsvandermaas@test.com', 'matthijs', 'van der maas', 'test company', 'danielle', 'marty');
-
-
 -- Product toevoegen
 INSERT INTO products (
     id,

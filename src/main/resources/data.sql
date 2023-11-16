@@ -22,8 +22,5 @@ INSERT INTO users (id, username, password) VALUES (1000, 'matthijsvandermaas@tes
 
 -- Product toevoegen
 INSERT INTO products (id, productname, namebrewer, productionlocation, type, alcohol, ibu, color, taste, volume)
-VALUES (1000, 'Hulk', 'Tony Stark', 'New York', 'IPA', 6.5, 50, 'Amber', 'Fruity', 33);
+VALUES (2000, 'Hulk', 'Tony Stark', 'New York', 'IPA', 6.5, 50, 'Amber', 'Fruity', 33);
 
--- Product toevoegen
-INSERT INTO products (id, productname, namebrewer, productionlocation, type, alcohol, ibu, color, taste, volume)
-VALUES (1001, 'Hulk', 'Tony Stark', 'New York', 'IPA', 6.5, 50, 'Amber', 'Fruity', 33);

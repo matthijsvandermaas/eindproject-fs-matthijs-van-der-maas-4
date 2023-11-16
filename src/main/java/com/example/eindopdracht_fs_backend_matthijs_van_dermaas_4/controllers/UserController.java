@@ -1,7 +1,6 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.controllers;
 
 
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.RoleDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.UserDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.RoleNotFoundException;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services.UserService;

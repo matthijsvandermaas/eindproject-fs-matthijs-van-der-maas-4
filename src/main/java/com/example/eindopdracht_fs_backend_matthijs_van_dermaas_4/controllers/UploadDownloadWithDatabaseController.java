@@ -2,10 +2,11 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.controllers;
 
 
 
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.FileDocumentDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.FileUpload.FileUploadResponse;
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.FileDocument;
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services.DatabaseService;
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services.FileDocumentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
@@ -24,9 +25,9 @@ import java.util.Objects;
 @RestController
 public class UploadDownloadWithDatabaseController {
 
-    private final DatabaseService databaseService;
+    private final FileDocumentService databaseService;
 
-    public UploadDownloadWithDatabaseController(DatabaseService databaseService) {
+    public UploadDownloadWithDatabaseController(FileDocumentService databaseService) {
         this.databaseService = databaseService;
     }
 
@@ -34,13 +35,13 @@ public class UploadDownloadWithDatabaseController {
     public FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
 
 
-        // next line makes url. example "http://localhost:8081/download/naam.jpg"
-        FileDocument fileDocument = databaseService.uploadFileDocument(file);
+
+        FileDocumentDto fileDocument = databaseService.uploadFileDocument(file);
         String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFromDB/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
 
         String contentType = file.getContentType();
 
-        return new FileUploadResponse(fileDocument.getFileName(), url, contentType );
+        return new FileUploadResponse(fileDocument.getFileName(), url, contentType);
     }
 
     //    get for single download
@@ -52,28 +53,6 @@ public class UploadDownloadWithDatabaseController {
 
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + document.getFileName()).body(document.getDocFile());
     }
-
-    //    post for multiple uploads to database
-    @PostMapping("/multiple/upload/db")
-    List<FileUploadResponse> multipleUpload(@RequestParam("files") MultipartFile [] files) {
-
-        if(files.length > 7) {
-            throw new RuntimeException("to many files selected");
-        }
-
-        return databaseService.createMultipleUpload(files);
-
-    }
-
-    @GetMapping("zipDownload/db")
-    public void zipDownload(@RequestBody String[] files, HttpServletResponse response) throws IOException {
-
-        databaseService.getZipDownload(files, response);
-
-    }
-
-    @GetMapping("/getAll/db")
-    public Collection<FileDocument> getAllFromDB(){
-        return databaseService.getALlFromDB();
-    }
 }
+
+

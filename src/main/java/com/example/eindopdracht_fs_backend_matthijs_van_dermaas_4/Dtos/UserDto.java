@@ -1,51 +1,65 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 
-
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Role;
-import jakarta.persistence.Id;
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Authority;
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 import jakarta.validation.constraints.NotEmpty;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class UserDto {
-    @Id
+
     private Long id;
     @NotEmpty(message = "username cannot be empty")
     private String username;
-    @NotEmpty(message = "password cannot be empty")
-    private String password;
-    @NotEmpty(message = "firstname cannot be empty")
+    @NotEmpty
     private String firstName;
     @NotEmpty(message = "lastname cannot be empty")
     private String lastName;
-    private String company;
     @NotEmpty(message = "email cannot be empty")
     private String email;
-    private String[] roles;
+    private String company;
+    @NotEmpty(message = "password cannot be empty")
+    private String password;
+    private List<String> roles;
 
+    // Constructors
 
-    //Constructor
+    public UserDto() {
+        // Default constructor
+    }
 
-    public UserDto(Long id, String username, String password, String firstName, String lastName, String company, String email, String[] roles) {
+    public UserDto(Long id, String username, String firstName, String lastName, String email, String company, String password, List<String> roles) {
         this.id = id;
         this.username = username;
-
         this.firstName = firstName;
         this.lastName = lastName;
-        this.company = company;
         this.email = email;
+        this.company = company;
+        this.password = password;
         this.roles = roles;
     }
 
-    public UserDto() {
-
+    public static UserDto fromEntity(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setEmail(user.getEmail());
+        userDto.setCompany(user.getCompany());
+        userDto.setPassword(user.getPassword());
+        List<String> roles = new ArrayList<>();
+        for (int i = 0; i < user.getRoles().size(); i++) {
+            roles.add(user.getRoles().get(i).getName());
+        }
+        userDto.setRoles(roles);
+        return userDto;
     }
-    // Getter en Setters
 
+    // Getters and Setters
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles.stream().map(Role::getName).toArray(String[]::new);
-    }
     public Long getId() {
         return id;
     }
@@ -60,14 +74,6 @@ public class UserDto {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -86,14 +92,6 @@ public class UserDto {
         this.lastName = lastName;
     }
 
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -102,8 +100,41 @@ public class UserDto {
         this.email = email;
     }
 
-    public String[] getRoles() {
-        return roles;
+    public String getCompany() {
+        return company;
     }
 
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<RoleDto> getRoles() {
+        List<RoleDto> roleDtos = new ArrayList<>();
+        for (String roleName : roles) {
+            RoleDto roleDto = new RoleDto();
+            roleDto.setName(roleName);
+            roleDtos.add(roleDto);
+        }
+        return roleDtos;
+    }
+
+
+
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+
+    public Set<Authority> getAuthorities() {
+        return null;
+    }
 }

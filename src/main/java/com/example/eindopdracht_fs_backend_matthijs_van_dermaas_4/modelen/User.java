@@ -2,7 +2,6 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -47,6 +46,9 @@ public class User {
 
     public User() {
 
+    }
+
+    public static void setRoles(List<Role> add) {
     }
 
     // Getters and setters
@@ -107,12 +109,14 @@ public class User {
         this.password = password;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+
+
+    public void setName(String name) {
+        this.firstName = name;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public Role[] getRoles() {
+        return getRoles();
     }
 }
 

@@ -2,7 +2,6 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services;
 
 
 
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.RoleDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.UserDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Role;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
@@ -19,7 +18,6 @@ import javax.management.relation.RoleNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,35 +37,30 @@ public class UserService {
     @Transactional
     @JsonIgnore
     public void createUser(UserDto userDto) throws RoleNotFoundException {
-        User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setEmail(userDto.getEmail());
-        user.setCompany(userDto.getCompany());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        User u = new User();
+        u.setUsername(userDto.getUsername());
+        u.setFirstName(userDto.getFirstName());
+        u.setLastName(userDto.getLastName());
+        u.setEmail(userDto.getEmail());
+        u.setCompany(userDto.getCompany());
+        u.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        List<Role> roles = userDto.getRolesAsObjects();
+        User.setRoles(roles);
 
-        List<Role> roles = new ArrayList<>();
+        // Encode password and save user
+        u.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userRepository.save(u);
 
-        for (RoleDto roleDto : userDto.getRoles()) {
-            Optional<Role> roleOptional = Optional.ofNullable((Role) roleRepository.findByName(roleDto.getName()));
-            if (roleOptional.isPresent()) {
-                roles.add(roleOptional.get());
-            } else {
-                throw new RoleNotFoundException("Role not found: " + roleDto.getName());
-            }
-        }
-
-        user.setRoles(roles);
-        userRepository.save(user);
     }
+
 
     public UserDto getUserById(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
-
-        return UserDto.fromEntity(user);
+        return null;
     }
+
+
 
     public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();

@@ -23,9 +23,13 @@ public class Role {
         // Default constructor
     }
 
+    public  Role getName() {
+        return null;
+    }
     public Role(String name) {
         this.name = name;
     }
+
 
     // Getters and Setters
 
@@ -37,9 +41,6 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public void setName(Role name) {
         this.name = String.valueOf(name);
@@ -48,4 +49,5 @@ public class Role {
     public String getRoleName() {
         return name;
     }
+
 }

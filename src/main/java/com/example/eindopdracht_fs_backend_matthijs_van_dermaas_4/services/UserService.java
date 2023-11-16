@@ -10,12 +10,14 @@ import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.Rol
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.UserRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.management.relation.RoleNotFoundException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import java.util.stream.Collectors;
@@ -26,17 +28,19 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private UserDto userDto;
 
     @Autowired
     public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+
     }
 
     @Transactional
     @JsonIgnore
-    public void createUser(UserDto userDto) throws RoleNotFoundException {
+    public void createUser(@Valid @RequestBody UserDto userDto) {
         User u = new User();
         u.setUsername(userDto.getUsername());
         u.setFirstName(userDto.getFirstName());
@@ -50,6 +54,7 @@ public class UserService {
         // Encode password and save user
         u.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userRepository.save(u);
+        ResponseEntity.ok("User created successfully");
 
     }
 

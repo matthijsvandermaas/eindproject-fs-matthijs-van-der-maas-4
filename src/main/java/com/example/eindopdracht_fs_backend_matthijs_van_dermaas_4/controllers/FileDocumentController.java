@@ -33,10 +33,4 @@ public class FileDocumentController {
         return new ResponseEntity<>(createdFileDocumentDto, HttpStatus.CREATED);
     }
 
-
-    @DeleteMapping("/delete/{fileDocumentId}")
-    public ResponseEntity<?> deleteFileDocument(@PathVariable Long fileDocumentId) {
-        fileDocumentService.deleteFileDocument(fileDocumentId);
-        return new ResponseEntity<>("FileDocument deleted successfully", HttpStatus.OK);
-    }
 }

@@ -13,4 +13,5 @@ public interface DocFileRepository extends JpaRepository<FileDocument, Long> {
     List<FileDocument> findByProduct_Id(Long productId);
 
     FileDocument findByFileName(String fileName);
+
 }

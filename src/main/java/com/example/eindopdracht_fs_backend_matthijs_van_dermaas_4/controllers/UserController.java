@@ -33,20 +33,21 @@ public class UserController {
         userService.createUser(userDto);
         return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
     }
-
-    @GetMapping("/{userId}")
-    @JsonIgnore
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
-        UserDto userDto = userService.getUserById(userId);
-        return new ResponseEntity<>(userDto, HttpStatus.OK);
+    @GetMapping("/users/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id) throws RoleNotFoundException {
+        try {
+            UserDto userDto = userService.getUserById(id);
+            if (userDto != null) {
+                return new ResponseEntity<>(userDto, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+            }
+        } catch (NumberFormatException e) {
+            return new ResponseEntity<>("Invalid userId format", HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @GetMapping
-    @JsonIgnore
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<UserDto> users = userService.getAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
-    }
+
 
 
     @DeleteMapping("/{deleteUserId}")

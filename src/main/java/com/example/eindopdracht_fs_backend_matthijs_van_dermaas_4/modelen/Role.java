@@ -4,51 +4,48 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-
 @Entity
 @Table(name = "roles")
 public class Role {
-    @Id
-    private String roleName;
 
-    @ManyToMany(mappedBy = "roles")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "role_name", unique = true, nullable = false)
+    private String name;
+
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<User> users;
 
+    // Constructors
 
     public Role() {
-
+        // Default constructor
     }
 
-    public Role(String roleName, List<User> users) {
-        this.roleName = roleName;
-        this.users = users;
+    public Role(String name) {
+        this.name = name;
     }
 
-    public Role(Role roleName) {
-    }
-    // Getters and setters
+    // Getters and Setters
 
-    public String getRoleName() {
-        return roleName;
+    public Long getId() {
+        return id;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
 
     public String getName() {
-        return getRoleName();
+        return name;
     }
-    public Role(String roleName) {
-        this.roleName = roleName;
+
+    public void setName(Role name) {
+        this.name = String.valueOf(name);
+    }
+
+    public String getRoleName() {
+        return name;
     }
 }

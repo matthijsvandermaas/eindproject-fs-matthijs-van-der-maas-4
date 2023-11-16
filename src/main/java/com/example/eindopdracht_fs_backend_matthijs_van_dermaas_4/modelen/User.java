@@ -11,20 +11,30 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "username")
     private String username;
+    @Column (name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
+    @Column (name = "email")
     private String email;
+    @Column (name = "company")
     private String company;
+    @Column(name = "password")
     private String password;
 
     //    Relation with Role ManyToMany.
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles = new ArrayList<>();
-
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles;
     // Constructor
 
-    public User(Long id, String username, String firstName, String lastName, String email, String company, String password, List<Role> roles) {
+    public User(Long id, String username, String firstName, String lastName, String email, String company, String password, String roles) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -32,7 +42,7 @@ public class User {
         this.email = email;
         this.company = company;
         this.password = password;
-        this.roles = roles;
+
     }
 
     public User() {
@@ -40,7 +50,6 @@ public class User {
     }
 
     // Getters and setters
-
 
     public Long getId() {
         return id;
@@ -106,6 +115,8 @@ public class User {
         this.roles = roles;
     }
 }
+
+
 
 
 

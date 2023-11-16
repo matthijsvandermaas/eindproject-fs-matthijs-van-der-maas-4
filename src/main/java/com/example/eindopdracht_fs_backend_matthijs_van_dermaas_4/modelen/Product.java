@@ -1,36 +1,54 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 public class Product {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "productname")
-    @NotEmpty(message = "product name cannot be empty")
+
+    @Column(name = "productName")
     private String productName;
-    @Column(name = "namebrewer")
+
+    @Column(name = "nameBrewer")
     private String nameBrewer;
-    @Column(name = "productionlocation")
+
+    @Column(name = "productionLocation")
     private String productionLocation;
+
     @Column(name = "type")
     private String type;
+
     @Column(name = "alcohol")
-    private Integer alcohol;
+    private Double alcohol;
+
     @Column(name = "ibu")
-    private Integer ibu;
+    private Double ibu;
+
     @Column(name = "color")
     private String color;
-    @Column(name = "taste")
-    private String tast;
-    @Column(name = "volume")
-    private String volume;
 
-    public Product(Long id, String productName, String nameBrewer, String productionLocation, String type, Integer alcohol, Integer ibu, String color, String tast, String volume, byte[] file, byte[] file2, String fileName, String fileName2) {
+    @Column(name = "tast")
+    private String tast;
+
+    @Column(name = "volume")
+    private Double volume;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<FileDocument> files = new HashSet<>();
+
+    
+
+
+       // Constructor
+
+    public Product(Long id, String productName, String nameBrewer, String productionLocation, String type,
+                   Double alcohol, Double ibu, String color, String tast, Double volume) {
         this.id = id;
         this.productName = productName;
         this.nameBrewer = nameBrewer;
@@ -46,6 +64,8 @@ public class Product {
     public Product() {
 
     }
+    // Getters and setters
+
 
     public Long getId() {
         return id;
@@ -87,19 +107,19 @@ public class Product {
         this.type = type;
     }
 
-    public Integer getAlcohol() {
+    public Double getAlcohol() {
         return alcohol;
     }
 
-    public void setAlcohol(Integer alcohol) {
+    public void setAlcohol(Double alcohol) {
         this.alcohol = alcohol;
     }
 
-    public Integer getIbu() {
+    public Double getIbu() {
         return ibu;
     }
 
-    public void setIbu(Integer ibu) {
+    public void setIbu(Double ibu) {
         this.ibu = ibu;
     }
 
@@ -119,13 +139,19 @@ public class Product {
         this.tast = tast;
     }
 
-    public String getVolume() {
+    public Double getVolume() {
         return volume;
     }
 
-    public void setVolume(String volume) {
+    public void setVolume(Double volume) {
         this.volume = volume;
     }
 
+    public Set<FileDocument> getFiles() {
+        return files;
+    }
 
+    public void setFiles(Set<FileDocument> files) {
+        this.files = files;
+    }
 }

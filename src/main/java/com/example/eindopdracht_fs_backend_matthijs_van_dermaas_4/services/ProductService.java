@@ -1,82 +1,59 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services;
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.ProductDto;
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.IdNotFoundException;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.ProductRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.ArrayList;
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
 
     private final ProductRepository productRepository;
 
+    @Autowired
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
+    public ProductDto getProductById(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
+
+        return ProductDto.fromEntity(product);
+    }
+
     public List<ProductDto> getAllProducts() {
-
         List<Product> products = productRepository.findAll();
-        List<ProductDto> productDtos = new ArrayList<>();
-
-        for (Product p : products) {
-            ProductDto productDto = new ProductDto();
-            productToProductDTO(p, productDto);
-
-            productDtos.add(productDto);
-        }
-        return productDtos;
+        return products.stream()
+                .map(ProductDto::fromEntity)
+                .collect(Collectors.toList());
     }
 
-
-    private static void productToProductDTO(Product p, ProductDto productDto) {
-        productDto.setProductName(p.getProductName());
-
-    }
-
-    private void productDTOToProduct(ProductDto productDTO, Product product) {
-
-        product.setProductName(productDTO.getProductName());
-        ;
-    }
-
-    public ProductDto getProduct(Long id) {
-        Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()) {
-            Product p = product.get();
-            ProductDto pdto = new ProductDto();
-            productToProductDTO(p, pdto);
-            return (pdto);
-        } else {
-            throw new IdNotFoundException("Product not found with id: " + id);
-        }
-    }
-
-    public ProductDto createProduct(ProductDto productDTO) {
-        Product product = new Product();
-        productDTOToProduct(productDTO, product);
-
+    public ProductDto createProduct(ProductDto productDto) {
+        Product product = ProductDto.toEntity(productDto);
         Product savedProduct = productRepository.save(product);
-
-        ProductDto savedProductDto = new ProductDto();
-        productToProductDTO(savedProduct, savedProductDto);
-
-        return savedProductDto;
+        return ProductDto.fromEntity(savedProduct);
     }
 
-    public String deleteProduct(@RequestBody Long id) {
+    public ProductDto updateProduct(Long productId, ProductDto productDto) {
+        Product existingProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
 
-        productRepository.deleteById(id);
-        return "Product deleted";
+        Product updatedProduct = ProductDto.toEntity(productDto);
+        updatedProduct.setId(existingProduct.getId());
+
+        Product savedProduct = productRepository.save(updatedProduct);
+        return ProductDto.fromEntity(savedProduct);
     }
 
-    public void saveProduct(Product product) {
-    }
+    public void deleteProduct(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
 
+        productRepository.delete(product);
+    }
 }

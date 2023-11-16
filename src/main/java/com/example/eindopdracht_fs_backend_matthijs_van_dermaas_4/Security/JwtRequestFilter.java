@@ -23,7 +23,7 @@ import java.io.IOException;
         private final UserDetailsService userDetailsService;
 
         private final JwtService jwtService;
-
+        @Autowired
         public JwtRequestFilter(JwtService jwtService, UserDetailsService udService) {
             this.jwtService = jwtService;
             this.userDetailsService = udService;

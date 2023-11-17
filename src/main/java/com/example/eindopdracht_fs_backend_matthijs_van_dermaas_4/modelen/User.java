@@ -1,7 +1,6 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -12,13 +11,13 @@ public class User {
     private Long id;
     @Column(name = "username")
     private String username;
-    @Column (name = "firstName")
+    @Column(name = "firstName")
     private String firstName;
     @Column(name = "lastName")
     private String lastName;
-    @Column (name = "email")
+    @Column(name = "email")
     private String email;
-    @Column (name = "company")
+    @Column(name = "company")
     private String company;
     @Column(name = "password")
     private String password;
@@ -33,7 +32,7 @@ public class User {
     private List<Role> roles;
     // Constructor
 
-    public User(Long id, String username, String firstName, String lastName, String email, String company, String password, String roles) {
+    public User(Long id, String username, String firstName, String lastName, String email, String company, String password, List<Role> roles) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -41,14 +40,15 @@ public class User {
         this.email = email;
         this.company = company;
         this.password = password;
-
+        this.roles = roles;
     }
+
 
     public User() {
 
     }
 
-    public static void setRoles(List<Role> add) {
+    public void setRoles(List<String> add) {
     }
 
     // Getters and setters
@@ -110,16 +110,15 @@ public class User {
     }
 
 
-
     public void setName(String name) {
         this.firstName = name;
     }
 
-    public Role[] getRoles() {
-        return getRoles();
+    public List<Role> getRoles() {
+        return roles;
     }
-}
 
+}
 
 
 

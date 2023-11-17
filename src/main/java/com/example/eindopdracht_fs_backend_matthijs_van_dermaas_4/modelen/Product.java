@@ -42,11 +42,10 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<FileDocument> files = new HashSet<>();
 
-    
-
-
        // Constructor
+       public Product() {
 
+       }
     public Product(Long id, String productName, String nameBrewer, String productionLocation, String type,
                    Double alcohol, Double ibu, String color, String tast, Double volume) {
         this.id = id;
@@ -61,11 +60,7 @@ public class Product {
         this.volume = volume;
     }
 
-    public Product() {
-
-    }
     // Getters and setters
-
 
     public Long getId() {
         return id;
@@ -147,11 +142,16 @@ public class Product {
         this.volume = volume;
     }
 
+    //FileDocument
+
     public Set<FileDocument> getFiles() {
         return files;
     }
 
     public void setFiles(Set<FileDocument> files) {
         this.files = files;
+
     }
+    // Methodes
 }
+

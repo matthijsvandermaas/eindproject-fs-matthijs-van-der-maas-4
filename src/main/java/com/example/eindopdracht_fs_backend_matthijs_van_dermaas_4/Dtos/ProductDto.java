@@ -2,6 +2,7 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
 import jakarta.validation.constraints.NotEmpty;
+import java.util.List;
 import java.util.Set;
 
 public class ProductDto {
@@ -17,7 +18,7 @@ public class ProductDto {
 
     @NotEmpty(message = "type cannot be empty")
     private String type;
-
+    @NotEmpty(message = "alcohol cannot be empty")
     private Double alcohol;
     private Double ibu;
 
@@ -28,14 +29,16 @@ public class ProductDto {
     private String tast;
 
     private Double volume;
+
+    @NotEmpty(message = "files cannot be empty")
     private Set<FileDocumentDto> files;
 
     // Constructors
-    public ProductDto() {}
+    public ProductDto() {
+        // Default constructor
+    }
 
-    public ProductDto(Long id, String productName, String nameBrewer, String productionLocation, String type,
-                      Double alcohol, Double ibu, String color, String tast, Double volume,
-                      Set<FileDocumentDto> files) {
+    public ProductDto(Long id, String productName, String nameBrewer, String productionLocation, String type, Double alcohol, Double ibu, String color, String tast, Double volume, Set<FileDocumentDto> files) {
         this.id = id;
         this.productName = productName;
         this.nameBrewer = nameBrewer;
@@ -61,25 +64,12 @@ public class ProductDto {
         productDto.setColor(product.getColor());
         productDto.setTast(product.getTast());
         productDto.setVolume(product.getVolume());
+
         return productDto;
     }
+//Getters and setters
 
-    public static Product toEntity(ProductDto productDto) {
-        Product product = new Product();
-        product.setId(productDto.getId());
-        product.setProductName(productDto.getProductName());
-        product.setNameBrewer(productDto.getNameBrewer());
-        product.setProductionLocation(productDto.getProductionLocation());
-        product.setType(productDto.getType());
-        product.setAlcohol(productDto.getAlcohol());
-        product.setIbu(productDto.getIbu());
-        product.setColor(productDto.getColor());
-        product.setTast(productDto.getTast());
-        product.setVolume(productDto.getVolume());
-        return product;
-    }
 
-    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -162,10 +152,16 @@ public class ProductDto {
 
     public Set<FileDocumentDto> getFiles() {
         return files;
+
     }
 
     public void setFiles(Set<FileDocumentDto> files) {
         this.files = files;
+
     }
+
+    //Methodes
 }
+
+
 

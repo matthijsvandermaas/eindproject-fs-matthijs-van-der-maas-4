@@ -1,6 +1,6 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Role;
+
 
 import java.util.List;
 import java.util.Set;
@@ -37,6 +37,7 @@ public class RoleDto {
         this.name = name;
     }
 
+
     public void setName(String name) {
         this.name = name;
     }
@@ -49,11 +50,8 @@ public class RoleDto {
         this.users = users;
     }
 
-    public static <R> R fromEntity(Role role) {
-        return null;
-    }
 
     public String getName() {
-        return null;
+        return name;
     }
 }

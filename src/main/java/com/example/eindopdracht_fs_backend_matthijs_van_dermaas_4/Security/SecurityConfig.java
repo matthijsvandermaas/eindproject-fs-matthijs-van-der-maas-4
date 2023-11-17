@@ -1,6 +1,7 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Security;
 
 
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.UserDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +39,8 @@ public class SecurityConfig {
         providerManager.setUserDetailsService(udService);
         return new ProviderManager(providerManager);
     }
+    @Bean
+    public UserDto userDto() {return new UserDto(); }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -61,29 +64,19 @@ public class SecurityConfig {
                                 "/roles").permitAll()
 
 //                        .requestMatchers(HttpMethod.GET, "/users").hasAnyRole("USER", "ADMIN", "BREWER")
-                        .requestMatchers(HttpMethod.GET, "/users/By/{id}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users").hasRole("BREWER")
-                        .requestMatchers(HttpMethod.DELETE, "/users").hasAnyRole("USER", "ADMIN", "BREWER")
-                        .requestMatchers(HttpMethod.PUT, "/users").hasAnyRole("USER", "ADMIN", "BREWER")
-
-
+                        .requestMatchers(HttpMethod.GET, "/users/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/producten").hasAnyRole("BREWER", "ADMIN")
                         .requestMatchers(HttpMethod.POST, "/producten").hasAnyRole("BREWER", "ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/producten").hasAnyRole("BREWER", "ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/producten").hasAnyRole("BREWER", "ADMIN")
+
                         .requestMatchers(HttpMethod.GET, "/producten/{id}").hasAnyRole("BREWER", "ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/producten/{id}").hasAnyRole("BREWER", "ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/producten/{id}").hasAnyRole("BREWER", "ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/producten/{id}").hasAnyRole("BREWER", "ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/authorities").permitAll()
                         .requestMatchers(HttpMethod.POST, "/authorities").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/authorities").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/roles").permitAll()
                         .requestMatchers(HttpMethod.POST, "/roles").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/roles").permitAll()
                         .anyRequest().denyAll()
 
                 )

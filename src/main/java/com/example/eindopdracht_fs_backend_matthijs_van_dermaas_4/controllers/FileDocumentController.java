@@ -2,8 +2,7 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.controllers;
 
 
 
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.FileDocumentDto;
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services.FileDocumentService;
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services.FileDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,23 +13,22 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/fileDocuments")
 public class FileDocumentController {
 
-    private final FileDocumentService fileDocumentService;
+    private final FileDocument fileDocumentService;
+    private com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.FileDocument fileDocument;
 
     @Autowired
-    public FileDocumentController(FileDocumentService fileDocumentService) {
+    public FileDocumentController(FileDocument fileDocumentService) {
         this.fileDocumentService = fileDocumentService;
     }
 
     @GetMapping("/{fileDocumentId}")
-    public ResponseEntity<FileDocumentDto> getFileDocumentById(@PathVariable Long fileDocumentId) {
-        FileDocumentDto fileDocumentDto = fileDocumentService.getFileDocumentById(fileDocumentId);
-        return new ResponseEntity<>(fileDocumentDto, HttpStatus.OK);
+    public ResponseEntity<com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.FileDocument> getFileDocumentById(@PathVariable Long fileDocumentId) {
+        com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.FileDocument fileDocument = fileDocumentService.getFileDocumentById(fileDocumentId);
+        return new ResponseEntity<>(fileDocument, HttpStatus.OK);
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<FileDocumentDto> uploadFileDocument(@RequestBody FileDocumentDto fileDocumentDto) {
-        FileDocumentDto createdFileDocumentDto = fileDocumentService.uploadFileDocument((MultipartFile) fileDocumentDto);
-        return new ResponseEntity<>(createdFileDocumentDto, HttpStatus.CREATED);
-    }
+    public ResponseEntity<String> uploadFileDocument(@RequestParam("file") MultipartFile file) {
+        return new ResponseEntity<>("Bestand succesvol geüpload", HttpStatus.CREATED);    }
 
 }

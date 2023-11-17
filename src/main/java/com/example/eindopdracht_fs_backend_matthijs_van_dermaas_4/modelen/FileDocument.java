@@ -24,6 +24,8 @@ public class FileDocument {
     @Temporal(TemporalType.TIMESTAMP)
     private Date uploadDate;
 
+    private String filePath;
+
     public FileDocument() {
         // Default constructor
     }
@@ -41,6 +43,7 @@ public class FileDocument {
         this.fileType = fileType;
         this.uploadDate = uploadDate;
     }
+
 
     // Getters en setters
 
@@ -91,5 +94,10 @@ public class FileDocument {
         this.product = product;
         product.getFiles().add(this);
     }
-
+    public String getFilePath() {
+        return filePath;
+    }
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 }

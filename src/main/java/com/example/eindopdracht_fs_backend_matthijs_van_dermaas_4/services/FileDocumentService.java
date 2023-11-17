@@ -19,20 +19,20 @@ public class FileDocumentService {
         String uploadDir = "./uploads";
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Path uploadPath = Paths.get(uploadDir);
-
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
-
         try (InputStream inputStream = file.getInputStream()) {
             Path filePath = uploadPath.resolve(fileName);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Bestand succesvol geüpload. Pad: " + filePath);
+        } catch (IOException e) {
+            System.err.println("Fout bij het kopiëren van het bestand: " + e.getMessage());
+            throw e;
         }
-
         FileDocument createdFileDocument = new FileDocument();
         createdFileDocument.setFileName(fileName);
         createdFileDocument.setFilePath(uploadPath.toString());
-
         return createdFileDocument;
     }
 }

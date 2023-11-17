@@ -100,4 +100,8 @@ public class FileDocument {
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
+
+    public Long getFileDocumentById(Long fileDocumentId) {
+        return fileDocumentId;
+    }
 }

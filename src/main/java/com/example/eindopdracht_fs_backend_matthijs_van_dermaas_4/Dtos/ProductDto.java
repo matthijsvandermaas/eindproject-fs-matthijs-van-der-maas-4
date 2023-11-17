@@ -1,5 +1,6 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.FileDocument;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
 import jakarta.validation.constraints.NotEmpty;
 import java.util.List;
@@ -31,14 +32,14 @@ public class ProductDto {
     private Double volume;
 
     @NotEmpty(message = "files cannot be empty")
-    private Set<FileDocumentDto> files;
+    private List<FileDocument> files;
 
     // Constructors
     public ProductDto() {
         // Default constructor
     }
 
-    public ProductDto(Long id, String productName, String nameBrewer, String productionLocation, String type, Double alcohol, Double ibu, String color, String tast, Double volume, Set<FileDocumentDto> files) {
+    public ProductDto(Long id, String productName, String nameBrewer, String productionLocation, String type, Double alcohol, Double ibu, String color, String tast, Double volume, List<FileDocument> files) {
         this.id = id;
         this.productName = productName;
         this.nameBrewer = nameBrewer;
@@ -150,12 +151,12 @@ public class ProductDto {
         this.volume = volume;
     }
 
-    public Set<FileDocumentDto> getFiles() {
+    public List<FileDocument> getFiles() {
         return files;
 
     }
 
-    public void setFiles(Set<FileDocumentDto> files) {
+    public void setFiles(List<FileDocument> files) {
         this.files = files;
 
     }

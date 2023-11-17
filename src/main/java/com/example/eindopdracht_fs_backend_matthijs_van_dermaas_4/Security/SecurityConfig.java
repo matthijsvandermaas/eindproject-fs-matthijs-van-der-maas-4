@@ -66,6 +66,7 @@ public class SecurityConfig {
 //                        .requestMatchers(HttpMethod.GET, "/users").hasAnyRole("USER", "ADMIN", "BREWER")
                         .requestMatchers(HttpMethod.GET, "/users/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/fileDocuments/upload").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/producten").hasAnyRole("BREWER", "ADMIN")
                         .requestMatchers(HttpMethod.POST, "/producten").hasAnyRole("BREWER", "ADMIN")

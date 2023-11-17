@@ -8,7 +8,6 @@ import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.FileUpload.Fil
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.FileDocument;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services.FileDocumentService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +16,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 ;
-import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 @CrossOrigin
@@ -51,7 +48,7 @@ public class UploadDownloadWithDatabaseController {
         FileDocument document = databaseService.singleFileDownload(fileName, request);
 
 
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + document.getFileName()).body(document.getDocFile());
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + document.getFileName()).body(document.getFileContent());
     }
 }
 

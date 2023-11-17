@@ -2,6 +2,8 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "file_document")
 public class FileDocument {
@@ -14,9 +16,17 @@ public class FileDocument {
     private String fileName;
 
     @Lob
-    @Column(name = "doc_file")
-    private byte[] docFile;
+    @Column(name = "file_content")
+    private byte[] fileContent;
 
+    private String fileType;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date uploadDate;
+
+    public FileDocument() {
+        // Default constructor
+    }
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -24,13 +34,14 @@ public class FileDocument {
 
     // Constructor
 
-    public FileDocument() {
+
+    public FileDocument(String fileName, byte[] fileContent, String fileType, Date uploadDate) {
+        this.fileName = fileName;
+        this.fileContent = fileContent;
+        this.fileType = fileType;
+        this.uploadDate = uploadDate;
     }
 
-    public FileDocument(String fileName, byte[] docFile) {
-        this.fileName = fileName;
-        this.docFile = docFile;
-    }
     // Getters en setters
 
     public Long getId() {
@@ -41,6 +52,14 @@ public class FileDocument {
         this.id = id;
     }
 
+    public byte[] getFileContent() {
+        return fileContent;
+    }
+
+    public void setFileContent(byte[] fileContent) {
+        this.fileContent = fileContent;
+    }
+
     public String getFileName() {
         return fileName;
     }
@@ -49,20 +68,28 @@ public class FileDocument {
         this.fileName = fileName;
     }
 
-    public byte[] getDocFile() {
-        return docFile;
+    public String getFileType() {
+        return fileType;
     }
 
-    public void setDocFile(byte[] docFile) {
-        this.docFile = docFile;
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 
+    public Date getUploadDate() {
+        return uploadDate;
+    }
 
-    // Je kunt deze methode toevoegen om gemakkelijk een FileDocument aan een Product toe te voegen
+    public void setUploadDate(Date uploadDate) {
+        this.uploadDate = uploadDate;
+    }
+
+    // methodes
+
+
     public void addToProduct(Product product) {
         this.product = product;
         product.getFiles().add(this);
     }
 
-    // Andere methoden en logica indien nodig
 }

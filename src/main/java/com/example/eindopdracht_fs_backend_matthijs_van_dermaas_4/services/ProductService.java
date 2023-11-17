@@ -1,11 +1,9 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services;
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.ProductDto;
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.UserDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.ProductRepository;
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.DocFileRepository;
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.FileDocumentRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -20,10 +18,10 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final DocFileRepository docFileRepository;
+    private final FileDocumentRepository docFileRepository;
 
     @Autowired
-    public ProductService(ProductRepository productRepository, DocFileRepository docFileRepository){
+    public ProductService(ProductRepository productRepository, FileDocumentRepository docFileRepository){
         this.productRepository = productRepository;
         this.docFileRepository = docFileRepository;
     }

@@ -1,20 +1,18 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Authority;
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Role;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 import jakarta.validation.constraints.NotEmpty;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 
 public class UserDto {
 
     private Long id;
     @NotEmpty(message = "username cannot be empty")
     private String username;
-    @NotEmpty
+    @NotEmpty(message = "firstname cannot be empty")
     private String firstName;
     @NotEmpty(message = "lastname cannot be empty")
     private String lastName;
@@ -23,8 +21,8 @@ public class UserDto {
     private String company;
     @NotEmpty(message = "password cannot be empty")
     private String password;
-    private List<Role> roles;
-
+    @NotEmpty(message = "roles cannot be empty")
+    private List<String> roles;
     // Constructors
 
     public UserDto() {
@@ -39,7 +37,7 @@ public class UserDto {
         this.email = email;
         this.company = company;
         this.password = password;
-
+        this.roles = roles;
     }
 
     public static UserDto fromEntity(User user) {
@@ -114,33 +112,20 @@ public class UserDto {
         this.password = password;
     }
 
-    public List<RoleDto> getRoles() {
-        List<RoleDto> roleDtos = new ArrayList<>();
-        for (Role roleName : roles) {
-            RoleDto roleDto = new RoleDto();
-            roleDto.setName(String.valueOf(roleName));
-            roleDtos.add(roleDto);
-        }
-        return roleDtos;
+    public List<String> getRoles() {
+        return roles;
     }
 
-
-
-
-    public  void setRoles(List<Role> roles) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
+    // methodes
 
 
     public Set<Authority> getAuthorities() {
         return null;
     }
 
-    public Object getName() {
-        return getName();
-    }
-
-    public List<Role> getRolesAsObjects() {
-        return roles;
+    public void addRole(String user) {
     }
 }

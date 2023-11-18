@@ -1,15 +1,18 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen;
 
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.FileDocumentRepository;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
 @Entity
 @Table(name = "file_document")
 public class FileDocument {
-
+    private static final Logger LOGGER = Logger.getLogger(FileDocument.class.getName());
     @Id
     @GeneratedValue
+    @Column(name = "file_document_id")
     private Long id;
 
     @Column(name = "file_name")
@@ -87,21 +90,25 @@ public class FileDocument {
         this.uploadDate = uploadDate;
     }
 
-    // methodes
 
-
-    public void addToProduct(Product product) {
-        this.product = product;
-        product.getFiles().add(this);
-    }
     public String getFilePath() {
         return filePath;
     }
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+
+
     }
 
-    public Long getFileDocumentById(Long fileDocumentId) {
-        return fileDocumentId;
+    // methodes
+
+    public static FileDocument getFileDocumentById(Long fileDocumentId, FileDocumentRepository fileDocumentRepository) {
+        LOGGER.info("Fetching FileDocument by ID: " + fileDocumentId);
+        return fileDocumentRepository.findById(fileDocumentId).orElse(null);
     }
+    public void addToProduct(Product product) {
+        this.product = product;
+        product.getFiles().add(this);
+    }
+
 }

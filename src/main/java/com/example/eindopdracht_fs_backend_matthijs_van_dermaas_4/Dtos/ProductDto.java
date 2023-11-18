@@ -33,7 +33,8 @@ public class ProductDto {
 
     @NotEmpty(message = "files cannot be empty")
     private List<FileDocument> files;
-
+    @NotEmpty(message = "photoFileName cannot be empty")
+    private String photoFileName;
     // Constructors
     public ProductDto() {
         // Default constructor
@@ -65,7 +66,6 @@ public class ProductDto {
         productDto.setColor(product.getColor());
         productDto.setTast(product.getTast());
         productDto.setVolume(product.getVolume());
-
         return productDto;
     }
 //Getters and setters
@@ -161,7 +161,21 @@ public class ProductDto {
 
     }
 
+
     //Methodes
+    public void add(ProductDto productDto) {
+        Product product = new Product();
+        product.setProductName(productDto.getProductName());
+        product.setNameBrewer(productDto.getNameBrewer());
+        product.setProductionLocation(productDto.getProductionLocation());
+        product.setType(productDto.getType());
+        product.setAlcohol(productDto.getAlcohol());
+        product.setIbu(productDto.getIbu());
+        product.setColor(productDto.getColor());
+        product.setTast(productDto.getTast());
+        product.setVolume(productDto.getVolume());
+
+    }
 }
 
 

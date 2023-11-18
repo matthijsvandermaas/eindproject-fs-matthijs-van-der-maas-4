@@ -38,11 +38,12 @@ public class Product {
 
     @Column(name = "volume")
     private Double volume;
+    private String photoFileName;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<FileDocument> files = new HashSet<>();
 
-       // Constructor
+    // Constructor
        public Product() {
 
        }
@@ -107,16 +108,31 @@ public class Product {
     }
 
     public void setAlcohol(Double alcohol) {
-        this.alcohol = alcohol;
-    }
+        if (alcohol >= 0.0 && alcohol <= 14.0) {
+            this.alcohol = alcohol;
+        } else {
+            System.err.println("De waarde van het alcohol % is te laag (> 0.0) of te hoog (< 14.0)");
+            setErrorMessage("De waarde van de alcohol % is te laag (> 0.0) of te hoog (< 120.0)");
+            throw new IllegalArgumentException("Ongeldige waarde voor Alcohol %");
+        }
 
+    }
     public Double getIbu() {
         return ibu;
     }
+        public void setIbu(Double ibu) {
+            if (ibu == 0.0 || ibu >= 120.0) {
+                this.ibu = ibu;
+            } else {
+                System.err.println("De waarde van de IBU is te laag (> 0.0) of te hoog (< 120.0)");
+                setErrorMessage("De waarde van de IBU is te laag (> 0.0) of te hoog (< 120.0)");
+                throw new IllegalArgumentException("Ongeldige waarde voor IBU");
+            }
+        }
 
-    public void setIbu(Double ibu) {
-        this.ibu = ibu;
+    private void setErrorMessage(String s) {
     }
+
 
     public String getColor() {
         return color;
@@ -152,6 +168,11 @@ public class Product {
         this.files = files;
 
     }
+
+    public void setPhotoFileName(String photoFileName) {
+           this.photoFileName = photoFileName;
+    }
+
     // Methodes
 }
 

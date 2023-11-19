@@ -25,4 +25,4 @@ VALUES ( 'Hulk', 'Tony Stark', 'New York', 'IPA', 6.5, 50, 'Amber', 'Fruity', 33
 
 -- User toevoegen
 INSERT INTO users (id, company, email, first_name, last_name, username, password)
-VALUES (1, 'BenB', 'matthijsvandermaas@test.com', 'matthijs', 'van der maas', 'admin', 'danielle');
+VALUES (3000, 'BenB', 'matthijsvandermaas@test.com', 'matthijs', 'van der maas', 'admin', 'danielle');

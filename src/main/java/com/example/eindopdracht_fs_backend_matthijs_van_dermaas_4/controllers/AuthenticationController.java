@@ -20,11 +20,11 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final MyUserDetailsService myUserDetailsService;
 
-    private final JwtUtil jwtUtl;
+    private final JwtUtil jwtUtil;
 
-    public AuthenticationController(AuthenticationManager authenticationManager, MyUserDetailsService myUserDetailsService, JwtUtil jwtUtl) {
+    public AuthenticationController(AuthenticationManager authenticationManager, MyUserDetailsService myUserDetailsService, JwtUtil jwtUtil) {
         this.authenticationManager = authenticationManager;
-        this.jwtUtl = jwtUtl;
+        this.jwtUtil = jwtUtil;
         this.myUserDetailsService = myUserDetailsService;
     }
 
@@ -33,8 +33,7 @@ public class AuthenticationController {
         return ResponseEntity.ok().body(principal);
     }
 
-    /*
-    Deze methode geeft het JWT-token terug */
+    // Deze methode geeft het JWT-token terug
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         String username = authenticationRequest.getUsername();
@@ -47,11 +46,9 @@ public class AuthenticationController {
             throw new Exception("Incorrect username or password", ex);
         }
 
-        final UserDetails myUserDetails = (UserDetails) myUserDetailsService
-                .loadUserByUsername(username);
-
-        final String jwt = jwtUtl.generateToken(myUserDetails);
-
+        final UserDetails myUserDetails = (UserDetails) myUserDetailsService.loadUserByUsername(username);
+        final String jwt = jwtUtil.generateToken(myUserDetails);
+        System.out.println("Generated Token: " + jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 

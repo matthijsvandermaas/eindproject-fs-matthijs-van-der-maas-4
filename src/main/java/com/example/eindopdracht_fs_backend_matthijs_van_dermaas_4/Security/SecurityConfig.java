@@ -55,7 +55,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/*",
                                 "drankorgel",
-                                "/authorities",
+                                "/authenticate",
                                 "/particulieren",
                                 "/producenten",
                                 "/producten",

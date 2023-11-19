@@ -3,7 +3,7 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
 
     @Id

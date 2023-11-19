@@ -53,8 +53,8 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
 }
 
 //user ophalen
-    public UserDto getUserById(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+    public UserDto getUserById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with id: " + id));
 
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());

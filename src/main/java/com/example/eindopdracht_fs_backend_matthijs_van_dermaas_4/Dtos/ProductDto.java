@@ -1,10 +1,9 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.FileDocument;
+
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
 import jakarta.validation.constraints.NotEmpty;
-import java.util.List;
-import java.util.Set;
+import jakarta.validation.constraints.Positive;
 
 public class ProductDto {
     private Long id;
@@ -19,8 +18,10 @@ public class ProductDto {
 
     @NotEmpty(message = "type cannot be empty")
     private String type;
-    @NotEmpty(message = "alcohol cannot be empty")
+
+    @Positive(message = "alcohol must be positive")
     private Double alcohol;
+
     private Double ibu;
 
     @NotEmpty(message = "color cannot be empty")
@@ -31,16 +32,12 @@ public class ProductDto {
 
     private Double volume;
 
-    @NotEmpty(message = "files cannot be empty")
-    private List<FileDocument> files;
-    @NotEmpty(message = "photoFileName cannot be empty")
-    private String photoFileName;
-    // Constructors
+  //Constructor
     public ProductDto() {
         // Default constructor
     }
 
-    public ProductDto(Long id, String productName, String nameBrewer, String productionLocation, String type, Double alcohol, Double ibu, String color, String tast, Double volume, List<FileDocument> files) {
+    public ProductDto(Long id, String productName, String nameBrewer, String productionLocation, String type, Double alcohol, Double ibu, String color, String tast, Double volume) {
         this.id = id;
         this.productName = productName;
         this.nameBrewer = nameBrewer;
@@ -51,9 +48,9 @@ public class ProductDto {
         this.color = color;
         this.tast = tast;
         this.volume = volume;
-        this.files = files;
-    }
 
+    }
+//Methodes
     public static ProductDto fromEntity(Product product) {
         ProductDto productDto = new ProductDto();
         productDto.setId(product.getId());
@@ -151,31 +148,6 @@ public class ProductDto {
         this.volume = volume;
     }
 
-    public List<FileDocument> getFiles() {
-        return files;
-
-    }
-
-    public void setFiles(List<FileDocument> files) {
-        this.files = files;
-
-    }
-
-
-    //Methodes
-    public void add(ProductDto productDto) {
-        Product product = new Product();
-        product.setProductName(productDto.getProductName());
-        product.setNameBrewer(productDto.getNameBrewer());
-        product.setProductionLocation(productDto.getProductionLocation());
-        product.setType(productDto.getType());
-        product.setAlcohol(productDto.getAlcohol());
-        product.setIbu(productDto.getIbu());
-        product.setColor(productDto.getColor());
-        product.setTast(productDto.getTast());
-        product.setVolume(productDto.getVolume());
-
-    }
 }
 
 

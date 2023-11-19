@@ -1,8 +1,6 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen;
 
 import jakarta.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -38,15 +36,11 @@ public class Product {
 
     @Column(name = "volume")
     private Double volume;
-    private String photoFileName;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<FileDocument> files = new HashSet<>();
+    private String errorMessage;
+
 
     // Constructor
-       public Product() {
-
-       }
     public Product(Long id, String productName, String nameBrewer, String productionLocation, String type,
                    Double alcohol, Double ibu, String color, String tast, Double volume) {
         this.id = id;
@@ -61,6 +55,9 @@ public class Product {
         this.volume = volume;
     }
 
+       public Product() {
+
+       }
     // Getters and setters
 
     public Long getId() {
@@ -117,6 +114,7 @@ public class Product {
         }
 
     }
+
     public Double getIbu() {
         return ibu;
     }
@@ -130,8 +128,7 @@ public class Product {
             }
         }
 
-    private void setErrorMessage(String s) {
-    }
+
 
 
     public String getColor() {
@@ -158,21 +155,12 @@ public class Product {
         this.volume = volume;
     }
 
-    //FileDocument
-
-    public Set<FileDocument> getFiles() {
-        return files;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setFiles(Set<FileDocument> files) {
-        this.files = files;
-
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
-
-    public void setPhotoFileName(String photoFileName) {
-           this.photoFileName = photoFileName;
-    }
-
-    // Methodes
 }
 

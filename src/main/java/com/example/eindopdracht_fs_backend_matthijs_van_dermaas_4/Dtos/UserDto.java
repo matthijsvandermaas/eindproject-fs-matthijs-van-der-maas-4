@@ -39,7 +39,7 @@ public class UserDto {
         this.password = password;
         this.roles = roles;
     }
-
+//Methodes
     public static UserDto fromEntity(User user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());

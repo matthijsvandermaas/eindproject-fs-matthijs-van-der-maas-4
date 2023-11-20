@@ -2,6 +2,7 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -37,7 +38,16 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
+        try {
+            // Controleer de indeling van het JWT-token
+            String[] parts = token.split("\\.");
+            if (parts.length != 3) {
+                throw new MalformedJwtException("JWT strings must contain exactly 2 period characters. Found: " + (parts.length - 1));
+            }
+            return Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJws(token).getBody();
+        } catch (MalformedJwtException e) {
+            throw e;
+        }
     }
 
     private Boolean isTokenExpired(String token) {

@@ -1,5 +1,4 @@
-package com.example.einopdracht_fs_backend_matthijs_van_dermaas_4.Security;
-
+package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Security;
 
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Role;

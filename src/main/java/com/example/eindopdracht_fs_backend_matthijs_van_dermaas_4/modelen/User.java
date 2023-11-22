@@ -11,9 +11,9 @@ public class User {
     private Long id;
     @Column(name = "username")
     private String username;
-    @Column(name = "firstName")
+    @Column(name = "firstname")
     private String firstName;
-    @Column(name = "lastName")
+    @Column(name = "lastname")
     private String lastName;
     @Column(name = "email")
     private String email;

@@ -1,5 +1,6 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 
+//import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Authority;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Authority;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 import jakarta.validation.constraints.NotEmpty;

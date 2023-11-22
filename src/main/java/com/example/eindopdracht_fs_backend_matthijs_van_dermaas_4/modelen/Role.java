@@ -11,7 +11,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "role_name", unique = true, nullable = false)
+    @Column(name = "rolename", unique = true, nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

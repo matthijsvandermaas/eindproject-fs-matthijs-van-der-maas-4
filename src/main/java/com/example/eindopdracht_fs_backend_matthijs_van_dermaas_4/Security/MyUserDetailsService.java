@@ -4,7 +4,6 @@ import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

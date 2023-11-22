@@ -10,13 +10,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "productName")
+    @Column(name = "productname")
     private String productName;
 
-    @Column(name = "nameBrewer")
+    @Column(name = "namebrewer")
     private String nameBrewer;
 
-    @Column(name = "productionLocation")
+    @Column(name = "productionlocation")
     private String productionLocation;
 
     @Column(name = "type")

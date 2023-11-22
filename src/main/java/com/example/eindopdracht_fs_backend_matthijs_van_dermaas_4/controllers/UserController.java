@@ -7,14 +7,13 @@ import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.Rol
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.UserRepository;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services.UserService;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,10 +21,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-
     private final UserService userService;
     private final UserRepository userRepository;
-
     @Autowired
     public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
@@ -38,14 +35,11 @@ public class UserController {
         try {
             userService.createUser(userDto);
         List<String> roles = userDto.getRoles();
-        System.out.println("Received user data: " + userDto.toString());
-        System.out.println("Received roles: " + roles);
             return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error while creating user: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
     //get all users
     @GetMapping
@@ -67,17 +61,12 @@ public class UserController {
         try {
             UserDto userDto = userService.getUserById(id);
             if (userDto != null) {
-                System.out.println("Request received for user id: " + id);
                 return new ResponseEntity<>(userDto, HttpStatus.OK);
-
             } else {
-                System.out.println("User not found");
                 return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
             }
         } catch (NumberFormatException e) {
-        System.out.println("Request received for user id: " + id);
             return new ResponseEntity<>("Invalid userId format", HttpStatus.BAD_REQUEST);
         }
     }
-
 }

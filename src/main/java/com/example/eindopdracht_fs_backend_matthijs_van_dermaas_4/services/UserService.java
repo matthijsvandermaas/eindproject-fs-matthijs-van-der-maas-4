@@ -4,6 +4,7 @@ import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.UserDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.RoleRepository;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.UserRepository;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -16,19 +17,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.stream.Collectors;
+
 
 @Service
 public class UserService {
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
+    //Constructor
     @Autowired
     public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
 //user aanmaken
 @Transactional
 @JsonIgnore
@@ -63,7 +64,6 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
         userDto.setUsername(user.getUsername());
         userDto.setEmail(user.getEmail());
         userDto.setCompany(user.getCompany());
-
         return userDto;
     }
 
@@ -71,7 +71,6 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
     public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();
         List<UserDto> userDtos = new ArrayList<>();
-
         for (User user : users) {
             UserDto userDto = new UserDto();
             userDto.setId(user.getId());
@@ -80,14 +79,10 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
             userDto.setUsername(user.getUsername());
             userDto.setEmail(user.getEmail());
             userDto.setCompany(user.getCompany());
-
             userDtos.add(userDto);
-
         }
-
         return userDtos;
     }
-
 }
 
 

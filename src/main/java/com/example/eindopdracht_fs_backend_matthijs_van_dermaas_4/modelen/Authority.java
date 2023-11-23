@@ -14,6 +14,10 @@ public class Authority implements Serializable {
     @Column(nullable = false)
     private String authority;
     public Authority() {}
+    @ManyToOne
+    @JoinColumn(name= "user_Id")
+    private User user;
+
     public Authority(String username, String authority) {
         this.username = username;
         this.authority = authority;

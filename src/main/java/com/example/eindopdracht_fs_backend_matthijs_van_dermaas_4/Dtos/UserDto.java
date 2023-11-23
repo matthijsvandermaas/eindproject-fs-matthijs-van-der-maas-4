@@ -99,7 +99,6 @@ public class UserDto {
     public void setRoles(List<String> roles) {
         this.roles = roles;
     }
-    // methodes
     public Set<Authority> getAuthorities() {
         return null;
     }

@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS products (
     taste VARCHAR(255),
     volume DOUBLE PRECISION
     );
-
 INSERT INTO products (productname, namebrewer, productionlocation, type, alcohol, ibu, color, tast, volume)
 VALUES ('Hulk', 'Tony Stark', 'New York', 'IPA', 6.5, 50, 'Amber', 'Fruity', 33);
 
@@ -30,6 +29,5 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255),
     password VARCHAR(255)
     );
-
 INSERT INTO users (company, email, firstname, lastname, username, password)
 VALUES ('BenB', 'matthijsvandermaas@BenB.com', 'matthijs', 'van der maas', 'admin matthijs', 'danielle');

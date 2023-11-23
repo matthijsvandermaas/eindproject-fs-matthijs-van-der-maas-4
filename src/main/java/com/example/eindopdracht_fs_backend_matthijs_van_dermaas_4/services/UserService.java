@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -44,8 +42,7 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
         u.setPassword(passwordEncoder.encode(userDto.getPassword()));
         List<String> roles = userDto.getRoles();
         u.setRoles(roles);
-
-        userRepository.save(u); // Voeg de gebruiker toe aan de database
+        userRepository.save(u);
 
         return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
     } catch (Exception e) {

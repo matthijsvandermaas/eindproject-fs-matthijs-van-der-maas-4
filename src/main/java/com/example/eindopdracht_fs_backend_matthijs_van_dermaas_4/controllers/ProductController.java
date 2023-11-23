@@ -1,10 +1,11 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.controllers;
 
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.ProductDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.RoleNotFoundException;
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.ProductRepository;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services.ProductService;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
-
 import java.util.List;
-
 import java.util.stream.Collectors;
-
 
 @CrossOrigin
 @RestController
@@ -38,6 +35,7 @@ public class ProductController {
     public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDto productDto) throws RoleNotFoundException {
         try {
             productService.createProduct(productDto);
+            List<String> roles = productDto.getRoles();
             System.out.println("Received user data: " + productDto.toString());
             return new ResponseEntity<>("Product created successfully", HttpStatus.CREATED);
         } catch (Exception e) {
@@ -46,7 +44,7 @@ public class ProductController {
     }
 
 
-    //get all users
+    //get all products
     @GetMapping
     public ResponseEntity<List<ProductDto>> getAllUsers() {
         List<Product> products = productRepository.findAll();

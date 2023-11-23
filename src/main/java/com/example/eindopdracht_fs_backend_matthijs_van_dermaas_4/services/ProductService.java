@@ -1,10 +1,9 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services;
 
-
-
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.ProductDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.ProductRepository;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -13,20 +12,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
-
-
     @Autowired
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-
     }
     //Product aanmaken
     @Transactional
@@ -43,9 +37,7 @@ public class ProductService {
             p.setIbu(productDto.getIbu());
             p.setColor(productDto.getColor());
             p.setVolume(productDto.getVolume());
-
-
-            productRepository.save(p); // Voeg de gebruiker toe aan de database
+            productRepository.save(p);
 
             return new ResponseEntity<>("Product created successfully", HttpStatus.CREATED);
         } catch (Exception e) {
@@ -68,8 +60,6 @@ public class ProductService {
         productDto.setIbu(product.getIbu());
         productDto.setColor(product.getColor());
         productDto.setVolume(product.getVolume());
-
-
         return productDto;
     }
 
@@ -77,7 +67,6 @@ public class ProductService {
     public List<ProductDto> getAllProducts() {
         List<Product> products = productRepository.findAll();
         List<ProductDto> productDtos = new ArrayList<>();
-
         for (Product product : products) {
             ProductDto productDto = new ProductDto();
             productDto.setId(product.getId());
@@ -90,11 +79,9 @@ public class ProductService {
             productDto.setIbu(product.getIbu());
             productDto.setColor(product.getColor());
             productDto.setVolume(product.getVolume());
-
             productDtos.add(productDto);
 
         }
-
         return productDtos;
     }
 

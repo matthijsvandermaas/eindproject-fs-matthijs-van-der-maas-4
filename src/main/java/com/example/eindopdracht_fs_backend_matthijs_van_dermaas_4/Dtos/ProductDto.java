@@ -4,6 +4,7 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
+import java.util.List;
 
 public class ProductDto {
     private Long id;
@@ -31,6 +32,8 @@ public class ProductDto {
     private String tast;
 
     private Double volume;
+    @NotEmpty(message = "roles cannot be empty")
+    private List<String> roles;
 
   //Constructor
     public ProductDto() {
@@ -71,83 +74,69 @@ public class ProductDto {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getProductName() {
         return productName;
     }
-
     public void setProductName(String productName) {
         this.productName = productName;
     }
-
     public String getNameBrewer() {
         return nameBrewer;
     }
-
     public void setNameBrewer(String nameBrewer) {
         this.nameBrewer = nameBrewer;
     }
-
     public String getProductionLocation() {
         return productionLocation;
     }
-
     public void setProductionLocation(String productionLocation) {
         this.productionLocation = productionLocation;
     }
-
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
-
     public Double getAlcohol() {
         return alcohol;
     }
-
     public void setAlcohol(Double alcohol) {
         this.alcohol = alcohol;
     }
-
     public Double getIbu() {
         return ibu;
     }
-
     public void setIbu(Double ibu) {
         this.ibu = ibu;
     }
-
     public String getColor() {
         return color;
     }
-
     public void setColor(String color) {
         this.color = color;
     }
-
     public String getTast() {
         return tast;
     }
-
     public void setTast(String tast) {
         this.tast = tast;
     }
-
     public Double getVolume() {
         return volume;
     }
-
     public void setVolume(Double volume) {
         this.volume = volume;
     }
-
+    public List<String> getRoles() {
+        return roles;
+    }
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 }
 
 

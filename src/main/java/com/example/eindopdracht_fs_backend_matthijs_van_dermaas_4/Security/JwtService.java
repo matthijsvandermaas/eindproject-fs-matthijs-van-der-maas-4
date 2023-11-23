@@ -1,9 +1,6 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,15 +40,17 @@ public class JwtService {
             if (parts.length < 2) {
                 System.out.println("Received JWT: " + token);
                 throw new MalformedJwtException("JWT strings must contain exactly 2 period characters. Found: " + (parts.length - 1));
-
             }
+            System.out.println("Received JWT Header: " + new String(Base64.getUrlDecoder().decode(parts[0])));
+            System.out.println("Received JWT Payload: " + new String(Base64.getUrlDecoder().decode(parts[1])));
             return Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJws(token).getBody();
-        } catch (MalformedJwtException e) {
-            System.out.println("Error parsing JWT: " + e.getMessage());
+        } catch (MalformedJwtException | UnsupportedJwtException | IllegalArgumentException | SecurityException e) {            System.out.println("Error parsing JWT: " + e.getMessage());
             e.printStackTrace();
             throw e;
         }
     }
+
+
 
 
 

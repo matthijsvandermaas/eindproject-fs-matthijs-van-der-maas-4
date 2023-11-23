@@ -2,6 +2,7 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.controllers;
 
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.AuthenticationRequest;
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.AuthenticationResponse;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Security.MyUserDetailsService;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.util.JwtUtil;
 import org.springframework.http.ResponseEntity;

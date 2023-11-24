@@ -51,11 +51,10 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
 }
 
 //user ophalen
-    public UserDto getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    public UserDto getUserByUsername(String username) {
+        User user = userRepository.findById(username).orElseThrow(() -> new RuntimeException("User not found with id: " + username));
 
         UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
         userDto.setUsername(user.getUsername());
@@ -70,7 +69,6 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
         List<UserDto> userDtos = new ArrayList<>();
         for (User user : users) {
             UserDto userDto = new UserDto();
-            userDto.setId(user.getId());
             userDto.setFirstName(user.getFirstName());
             userDto.setLastName(user.getLastName());
             userDto.setUsername(user.getUsername());

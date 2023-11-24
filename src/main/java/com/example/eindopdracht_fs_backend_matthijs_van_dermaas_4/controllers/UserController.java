@@ -55,10 +55,10 @@ public class UserController {
     }
 
     //get user by id
-    @GetMapping("/user/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Long id) throws RoleNotFoundException {
+    @GetMapping("/user/{username}")
+    public ResponseEntity<?> getUserByUserName(@PathVariable String username) throws RoleNotFoundException {
         try {
-            UserDto userDto = userService.getUserById(id);
+            UserDto userDto = userService.getUserByUsername(username);
             if (userDto != null) {
                 return new ResponseEntity<>(userDto, HttpStatus.OK);
             } else {

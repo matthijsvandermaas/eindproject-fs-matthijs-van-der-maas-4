@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 public class UserDto {
-    private Long id;
     @NotEmpty(message = "username cannot be empty")
     private String username;
     @NotEmpty(message = "firstname cannot be empty")
@@ -27,8 +26,7 @@ public class UserDto {
     public UserDto() {
         // Default constructor
     }
-    public UserDto(Long id, String username, String firstName, String lastName, String email, String company, String password, List<String> roles) {
-        this.id = id;
+    public UserDto(String username, String firstName, String lastName, String email, String company, String password, List<String> roles) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,7 +38,6 @@ public class UserDto {
 //Methodes
     public static UserDto fromEntity(User user) {
         UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
@@ -51,12 +48,6 @@ public class UserDto {
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getUsername() {
         return username;
     }

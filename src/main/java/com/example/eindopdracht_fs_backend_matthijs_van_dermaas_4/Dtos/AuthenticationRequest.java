@@ -1,9 +1,13 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos;
 
-public class AuthenticationRequest {
+import jakarta.validation.constraints.NotEmpty;
 
+public class AuthenticationRequest {
+@NotEmpty(message = "username is required")
     private String username;
+@NotEmpty(message = "password is required")
     private String password;
+@NotEmpty(message = "role is required")
     private String role;
 
     public AuthenticationRequest() {

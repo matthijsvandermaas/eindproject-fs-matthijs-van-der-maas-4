@@ -12,10 +12,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
 @Service
 public class JwtService {
-    private final static String SECRET_KEY ="$2a$12$gimsXjgSD3op0uxAnOoFW.ImjtPOgsBN5MtfdIBVI/NLTFBGaGGga";
+    private final static String SECRET_KEY = "yabredfreadooeebadabbadooyabbadddbadorrrbbadabbadoo";
+
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
@@ -35,24 +35,8 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        try {
-            String[] parts = token.split("\\.");
-            if (parts.length < 2) {
-                System.out.println("Received JWT: " + token);
-                throw new MalformedJwtException("JWT strings must contain exactly 2 period characters. Found: " + (parts.length - 1));
-            }
-            System.out.println("Received JWT Header: " + new String(Base64.getUrlDecoder().decode(parts[0])));
-            System.out.println("Received JWT Payload: " + new String(Base64.getUrlDecoder().decode(parts[1])));
-            return Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJws(token).getBody();
-        } catch (MalformedJwtException | UnsupportedJwtException | IllegalArgumentException | SecurityException e) {            System.out.println("Error parsing JWT: " + e.getMessage());
-            e.printStackTrace();
-            throw e;
-        }
+        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
     }
-
-
-
-
 
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
@@ -62,8 +46,9 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
     }
-    private String createToken(Map<String, Object> claims, String subject) {
-        long validPeriod = 1000 * 60 * 60 * 24 * 10;
+    private String createToken(Map<String, Object> claims, String
+            subject) {
+        long validPeriod = 1000 * 60 * 60 * 24 * 10; // 10 days in ms
         long currentTime = System.currentTimeMillis();
         return Jwts.builder()
                 .setClaims(claims)
@@ -73,7 +58,6 @@ public class JwtService {
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
-
 
     public Boolean validateToken(String token, UserDetails
             userDetails) {

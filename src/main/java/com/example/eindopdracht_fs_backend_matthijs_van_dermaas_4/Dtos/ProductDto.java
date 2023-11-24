@@ -7,8 +7,6 @@ import jakarta.validation.constraints.Positive;
 import java.util.List;
 
 public class ProductDto {
-    private Long id;
-
     @NotEmpty(message = "productName cannot be empty")
     private String productName;
 
@@ -40,8 +38,7 @@ public class ProductDto {
         // Default constructor
     }
 
-    public ProductDto(Long id, String productName, String nameBrewer, String productionLocation, String type, Double alcohol, Double ibu, String color, String tast, Double volume) {
-        this.id = id;
+    public ProductDto(String productName, String nameBrewer, String productionLocation, String type, Double alcohol, Double ibu, String color, String tast, Double volume) {
         this.productName = productName;
         this.nameBrewer = nameBrewer;
         this.productionLocation = productionLocation;
@@ -56,7 +53,6 @@ public class ProductDto {
 //Methodes
     public static ProductDto fromEntity(Product product) {
         ProductDto productDto = new ProductDto();
-        productDto.setId(product.getId());
         productDto.setProductName(product.getProductName());
         productDto.setNameBrewer(product.getNameBrewer());
         productDto.setProductionLocation(product.getProductionLocation());
@@ -69,14 +65,6 @@ public class ProductDto {
         return productDto;
     }
 //Getters and setters
-
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getProductName() {
         return productName;
     }

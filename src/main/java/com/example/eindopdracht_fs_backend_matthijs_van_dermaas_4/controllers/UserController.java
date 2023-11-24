@@ -54,8 +54,8 @@ public class UserController {
         }
     }
 
-    //get user by id
-    @GetMapping("/user/{username}")
+    //get user by username
+    @GetMapping("/{username}")
     public ResponseEntity<?> getUserByUserName(@PathVariable String username) throws RoleNotFoundException {
         try {
             UserDto userDto = userService.getUserByUsername(username);

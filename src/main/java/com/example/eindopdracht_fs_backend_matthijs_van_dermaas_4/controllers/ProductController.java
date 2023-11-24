@@ -58,13 +58,12 @@ public class ProductController {
         }
     }
 
-    //get user by id
-    @GetMapping("/products/{id}")
-    public ResponseEntity<?> getProductById(@PathVariable Long id) throws RoleNotFoundException {
+    //get user by productname
+    @GetMapping("/{product_name}")
+    public ResponseEntity<?> getProductByProductName(@PathVariable String productname) throws RoleNotFoundException {
         try {
-            ProductDto productDto = productService.getProductById(id);
+            ProductDto productDto = productService.getProductByProductName(productname);
             if (productDto != null) {
-                System.out.println("Request received for product id: " + id);
                 return new ResponseEntity<>(productDto, HttpStatus.OK);
 
             } else {
@@ -72,7 +71,6 @@ public class ProductController {
                 return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
             }
         } catch (NumberFormatException e) {
-            System.out.println("Request received for product id: " + id);
             return new ResponseEntity<>("Invalid productId format", HttpStatus.BAD_REQUEST);
         }
     }

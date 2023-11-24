@@ -52,8 +52,7 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
 
 //user ophalen
     public UserDto getUserByUsername(String username) {
-        User user = userRepository.findById(username).orElseThrow(() -> new RuntimeException("User not found with id: " + username));
-
+        User user = userRepository.findById(username).orElseThrow(() -> new RuntimeException("User not found with username: " + username));
         UserDto userDto = new UserDto();
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
@@ -62,7 +61,6 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
         userDto.setCompany(user.getCompany());
         return userDto;
     }
-
 //alle users ophalen
     public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();

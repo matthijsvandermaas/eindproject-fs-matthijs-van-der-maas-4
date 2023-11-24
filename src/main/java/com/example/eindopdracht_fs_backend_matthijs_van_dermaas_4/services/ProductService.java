@@ -46,11 +46,9 @@ public class ProductService {
     }
 
     //user ophalen
-    public ProductDto getProductById(Long id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
-
+    public ProductDto getProductByProductName(String productName) {
+        Product product = productRepository.findById(productName).orElseThrow(() -> new RuntimeException("Product not found with productName: " + productName));
         ProductDto productDto = new ProductDto();
-        productDto.setId(product.getId());
         productDto.setProductName(product.getProductName());
         productDto.setNameBrewer(product.getNameBrewer());
         productDto.setProductionLocation(product.getProductionLocation());
@@ -62,14 +60,12 @@ public class ProductService {
         productDto.setVolume(product.getVolume());
         return productDto;
     }
-
     //alle product ophalen
     public List<ProductDto> getAllProducts() {
         List<Product> products = productRepository.findAll();
         List<ProductDto> productDtos = new ArrayList<>();
         for (Product product : products) {
             ProductDto productDto = new ProductDto();
-            productDto.setId(product.getId());
             productDto.setProductName(product.getProductName());
             productDto.setNameBrewer(product.getNameBrewer());
             productDto.setProductionLocation(product.getProductionLocation());
@@ -80,7 +76,6 @@ public class ProductService {
             productDto.setColor(product.getColor());
             productDto.setVolume(product.getVolume());
             productDtos.add(productDto);
-
         }
         return productDtos;
     }

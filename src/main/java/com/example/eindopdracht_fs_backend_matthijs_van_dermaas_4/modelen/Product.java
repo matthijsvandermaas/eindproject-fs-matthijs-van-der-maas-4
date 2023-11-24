@@ -5,11 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "products")
 public class Product {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "productname")
     private String productName;
 
@@ -41,9 +37,8 @@ public class Product {
 
 
     // Constructor
-    public Product(Long id, String productName, String nameBrewer, String productionLocation, String type,
+    public Product(String productName, String nameBrewer, String productionLocation, String type,
                    Double alcohol, Double ibu, String color, String tast, Double volume) {
-        this.id = id;
         this.productName = productName;
         this.nameBrewer = nameBrewer;
         this.productionLocation = productionLocation;
@@ -59,15 +54,6 @@ public class Product {
 
        }
     // Getters and setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getProductName() {
         return productName;
     }

@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS products (
     volume DOUBLE PRECISION
     );
 INSERT INTO products (productname, namebrewer, productionlocation, type, alcohol, ibu, color, tast, volume)
-VALUES ('Hulk', 'Tony Stark', 'New York', 'IPA', 6.5, 50, 'Amber', 'Fruity', 33);
+VALUES ('Bitburger', 'Bitburger', 'Beieren', 'pilsner', 0.1, 1, 'bleekgeel', 'fris', 33);
 
 -- User toevoegen
 CREATE TABLE IF NOT EXISTS users (
@@ -29,5 +29,5 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255),
     password VARCHAR(255)
     );
-INSERT INTO users (company, email, firstname, lastname, username, password)
-VALUES ('BenB', 'matthijsvandermaas@BenB.com', 'matthijs', 'van der maas', 'admin matthijs', '$2a$12$XuDwsr1Ri/IqGGAHFus4XOhZk4RDnPRgUjRfXBX2B2osGD12uy/y.');-- danielle
+-- INSERT INTO users (company, email, firstname, lastname, username, password)
+-- VALUES ('BenB', 'matthijsvandermaas@BenB.com', 'matthijs', 'van der maas', 'admin matthijs', '$2a$12$XuDwsr1Ri/IqGGAHFus4XOhZk4RDnPRgUjRfXBX2B2osGD12uy/y.');-- danielle

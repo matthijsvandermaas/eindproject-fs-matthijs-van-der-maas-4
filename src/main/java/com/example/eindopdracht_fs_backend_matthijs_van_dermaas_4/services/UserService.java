@@ -1,6 +1,7 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services;
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.UserDto;
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.IdNotFoundException;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.RoleRepository;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.UserRepository;
@@ -75,6 +76,16 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
             userDtos.add(userDto);
         }
         return userDtos;
+    }
+
+    public String deleteProfile(@RequestBody String username) {
+        if (userRepository.existsByUsername(username)) {
+            userRepository.deleteByUsername(username);
+        } else {
+            throw new IdNotFoundException("Profile not found with username: " + username);
+        }
+
+        return "Profile deleted";
     }
 }
 

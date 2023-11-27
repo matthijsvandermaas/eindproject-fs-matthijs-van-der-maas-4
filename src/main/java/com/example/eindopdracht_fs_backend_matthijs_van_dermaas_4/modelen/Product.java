@@ -43,15 +43,13 @@ public class Product {
         this.nameBrewer = nameBrewer;
         this.productionLocation = productionLocation;
         this.type = type;
-        this.alcohol = alcohol;
-        this.ibu = ibu;
+        this.setAlcohol(alcohol);
+        this.setIbu(ibu);
         this.color = color;
         this.tast = tast;
         this.volume = volume;
     }
-
        public Product() {
-
        }
     // Getters and setters
     public String getProductName() {
@@ -91,31 +89,15 @@ public class Product {
     }
 
     public void setAlcohol(Double alcohol) {
-        if (alcohol >= 0.0 && alcohol <= 14.0) {
-            this.alcohol = alcohol;
-        } else {
-            System.err.println("De waarde van het alcohol % is te laag (> 0.0) of te hoog (< 14.0)");
-            setErrorMessage("De waarde van de alcohol % is te laag (> 0.0) of te hoog (< 120.0)");
-            throw new IllegalArgumentException("Ongeldige waarde voor Alcohol %");
-        }
-
+               this.alcohol = alcohol;
     }
 
     public Double getIbu() {
         return ibu;
     }
         public void setIbu(Double ibu) {
-            if (ibu == 0.0 || ibu >= 120.0) {
                 this.ibu = ibu;
-            } else {
-                System.err.println("De waarde van de IBU is te laag (> 0.0) of te hoog (< 120.0)");
-                setErrorMessage("De waarde van de IBU is te laag (> 0.0) of te hoog (< 120.0)");
-                throw new IllegalArgumentException("Ongeldige waarde voor IBU");
-            }
         }
-
-
-
 
     public String getColor() {
         return color;

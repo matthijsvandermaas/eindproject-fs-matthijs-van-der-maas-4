@@ -1,6 +1,7 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.controllers;
 
 
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.IdNotFoundException;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.UserDto;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.RoleNotFoundException;
@@ -36,7 +37,7 @@ public class UserController {
         List<String> roles = userDto.getRoles();
             return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error while creating user: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error while creating user: ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -56,16 +57,27 @@ public class UserController {
 
     //get user by username
     @GetMapping("/{username}")
-    public ResponseEntity<?> getUserByUserName(@PathVariable String username) throws RoleNotFoundException {
+    public ResponseEntity<UserDto> getUserByUserName(@PathVariable String username) throws RoleNotFoundException {
         try {
             UserDto userDto = userService.getUserByUsername(username);
             if (userDto != null) {
-                return new ResponseEntity<>(userDto, HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (NumberFormatException e) {
-            return new ResponseEntity<>("Invalid userId format", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @DeleteMapping("/{username}")
+    public ResponseEntity<UserDto> deleteProfile(@PathVariable String username) {
+        try {
+            userService.deleteProfile(username);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (IdNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

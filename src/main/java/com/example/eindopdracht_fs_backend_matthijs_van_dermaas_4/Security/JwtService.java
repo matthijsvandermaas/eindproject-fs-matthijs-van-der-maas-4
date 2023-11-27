@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.function.Function;
 @Service
 public class JwtService {
-    private final static String SECRET_KEY = "yabredfreadooeebadabbadooyabbadddbadorrrbbadabbadoo";
+    private final static String SECRET_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlIiwiaWF0IjoxNzAxMDMyODk0LCJleHAiOjE3MDE4OTY4OTR9.slW6_z3TD66CGCZiRM9k0E98qrUmelVZoIioBwBYey4";
 
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);

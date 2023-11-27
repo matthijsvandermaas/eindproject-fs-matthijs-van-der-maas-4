@@ -2,10 +2,8 @@ package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.controllers;
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.ProductDto;
-import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.RoleNotFoundException;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.ProductRepository;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services.ProductService;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +18,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-
     private final ProductService productService;
     private final ProductRepository productRepository;
-
     @Autowired
     public ProductController(ProductService productService, ProductRepository productRepository) {
            this.productService = productService;
@@ -32,11 +28,10 @@ public class ProductController {
     //create product
     @PostMapping(value = "/createProduct")
     @JsonIgnore
-    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDto productDto) throws RoleNotFoundException {
+    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDto productDto){
         try {
             productService.createProduct(productDto);
-            List<String> roles = productDto.getRoles();
-            System.out.println("Received user data: " + productDto.toString());
+            System.out.println("Received product data: " + productDto.toString());
             return new ResponseEntity<>("Product created successfully", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error while creating product: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -58,14 +53,13 @@ public class ProductController {
         }
     }
 
-    //get user by productname
-    @GetMapping("/{product_name}")
-    public ResponseEntity<?> getProductByProductName(@PathVariable String productname) throws RoleNotFoundException {
+    //get user by product name
+    @GetMapping("/{productName}")
+    public ResponseEntity<?> getProductByProductName(@PathVariable String productName){
         try {
-            ProductDto productDto = productService.getProductByProductName(productname);
+            ProductDto productDto = productService.getProductByProductName(productName);
             if (productDto != null) {
                 return new ResponseEntity<>(productDto, HttpStatus.OK);
-
             } else {
                 System.out.println("Product not found");
                 return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);

@@ -59,12 +59,12 @@ public class SecurityConfig {
                                 "/particulieren",
                                 "/producenten",
                                 "/producten",
-                                "/users",
                                 "/users/createUser",
+                                "/users/createProduct",
                                 "/roles").permitAll()
 
 //                        .requestMatchers(HttpMethod.GET, "/users").hasAnyRole("USER", "ADMIN", "BREWER")
-                        .requestMatchers(HttpMethod.GET, "/users/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/{username}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/fileDocuments/upload").permitAll()
                         .requestMatchers(HttpMethod.POST, "/products/createProduct").permitAll()

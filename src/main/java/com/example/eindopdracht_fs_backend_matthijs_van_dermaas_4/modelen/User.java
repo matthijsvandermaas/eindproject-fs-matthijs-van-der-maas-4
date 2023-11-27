@@ -41,7 +41,6 @@ public class User {
         this.roles = roles;
     }
     public User() {
-
     }
     public void setRoles(List<String> add) {
     }

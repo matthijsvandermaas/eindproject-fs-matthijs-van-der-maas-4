@@ -30,8 +30,6 @@ public class ProductDto {
     private String tast;
 
     private Double volume;
-    @NotEmpty(message = "roles cannot be empty")
-    private List<String> roles;
 
   //Constructor
     public ProductDto() {
@@ -118,12 +116,6 @@ public class ProductDto {
     }
     public void setVolume(Double volume) {
         this.volume = volume;
-    }
-    public List<String> getRoles() {
-        return roles;
-    }
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
     }
 }
 

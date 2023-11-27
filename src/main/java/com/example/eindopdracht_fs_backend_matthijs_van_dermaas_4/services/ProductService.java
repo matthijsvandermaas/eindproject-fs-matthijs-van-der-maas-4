@@ -1,6 +1,7 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services;
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.ProductDto;
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.IdNotFoundException;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.Product;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.ProductRepository;
 
@@ -78,6 +79,15 @@ public class ProductService {
             productDtos.add(productDto);
         }
         return productDtos;
+    }
+    public String deleteProduct(@RequestBody String productName) {
+        if (productRepository.existsByProductName(productName)) {
+            productRepository.deleteByProductName(productName);
+        } else {
+            throw new IdNotFoundException("Profile not found with product name: " + productName);
+        }
+
+        return "Profile deleted";
     }
 
 }

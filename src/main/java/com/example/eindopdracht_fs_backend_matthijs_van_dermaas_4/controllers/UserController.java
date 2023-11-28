@@ -29,17 +29,18 @@ public class UserController {
         this.userRepository = userRepository;
     }
 //create user
-    @PostMapping(value = "/createUser")
-    @JsonIgnore
-   public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) throws RoleNotFoundException {
-        try {
-            userService.createUser(userDto);
+@PostMapping("/createUser")
+@JsonIgnore
+public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) throws RoleNotFoundException {
+    try {
+        userService.createUser(userDto);
         List<String> roles = userDto.getRoles();
-            return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error while creating user: ", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
+    } catch (Exception e) {
+        return new ResponseEntity<>("Error while creating user: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+}
+
 
     //get all users
     @GetMapping

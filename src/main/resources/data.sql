@@ -29,5 +29,5 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255),
     password VARCHAR(255)
     );
--- INSERT INTO users (company, email, firstname, lastname, username, password)
--- VALUES ('BenB', 'matthijsvandermaas@BenB.com', 'matthijs', 'van der maas', 'admin matthijs', '$2a$12$XuDwsr1Ri/IqGGAHFus4XOhZk4RDnPRgUjRfXBX2B2osGD12uy/y.');-- danielle
+INSERT INTO users (company, email, firstname, lastname, username, password)
+VALUES ('BenB', 'matthijsvandermaas@BenB.com', 'matthijs', 'van der maas', 'admin matthijs', '$2a$12$XuDwsr1Ri/IqGGAHFus4XOhZk4RDnPRgUjRfXBX2B2osGD12uy/y.');-- danielle

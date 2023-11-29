@@ -1,6 +1,7 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.controllers;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.IdNotFoundException;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.UserDto;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     private final UserRepository userRepository;
     @Autowired
@@ -59,14 +61,18 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) throws 
     //get user by username
     @GetMapping("/{username}")
     public ResponseEntity<UserDto> getUserByUserName(@PathVariable String username) throws RoleNotFoundException {
+        logger.info("GET request received for username: {}", username);
         try {
             UserDto userDto = userService.getUserByUsername(username);
             if (userDto != null) {
+                logger.info("User found for username: {}", username);
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
+                logger.info("User not found for username: {}", username);
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (NumberFormatException e) {
+            logger.error("Error while processing the request", e);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

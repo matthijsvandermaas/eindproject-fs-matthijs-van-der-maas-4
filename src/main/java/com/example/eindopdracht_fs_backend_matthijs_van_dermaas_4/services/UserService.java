@@ -1,6 +1,7 @@
 package com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.services;
 
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.Dtos.UserDto;
+import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.controllers.UserController;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.exceptions.IdNotFoundException;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.modelen.User;
 import com.example.eindopdracht_fs_backend_matthijs_van_dermaas_4.repository.RoleRepository;
@@ -17,9 +18,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @Service
 public class UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     //Constructor
@@ -47,13 +52,16 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
 
         return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
     } catch (Exception e) {
+        logger.error("Error while creating user", e);
         return new ResponseEntity<>("Error while creating user: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
 //user ophalen
     public UserDto getUserByUsername(String username) {
-        User user = userRepository.findById(username).orElseThrow(() -> new RuntimeException("User not found with username: " + username));
+        Optional<User> optionalUser = userRepository.findById(username);
+        if (optionalUser.isPresent()) {
+        User user = optionalUser.get();
         UserDto userDto = new UserDto();
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
@@ -61,6 +69,9 @@ public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
         userDto.setEmail(user.getEmail());
         userDto.setCompany(user.getCompany());
         return userDto;
+        } else {
+            return null;
+        }
     }
 //alle users ophalen
     public List<UserDto> getAllUsers() {
